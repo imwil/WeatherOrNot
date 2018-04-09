@@ -14,10 +14,15 @@ public class GameSettings : MonoBehaviour
 
 	public float obstacleSpawnInterval;
 
+	private void Awake()
+	{
+		m_instance = this;
+	} 
+
 	// Use this for initialization
 	void Start ()
 	{
-		m_instance = this;
+
 	}
 	
 	// Update is called once per frame
