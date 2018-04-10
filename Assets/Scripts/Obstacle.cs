@@ -11,7 +11,7 @@ public class Obstacle : MonoBehaviour
 	void Start ()
 	{
 		m_rigidBody2D = GetComponent<Rigidbody2D>();
-		m_rigidBody2D.velocity = Vector2.up * GameSettings.m_instance.obstacleSpeed;
+		m_rigidBody2D.velocity = Vector2.down * GameSettings.m_instance.obstacleSpeed;
 	}
 	
 	// Update is called once per frame
