@@ -30,11 +30,14 @@ public class OstacleSpawner : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		m_lastSpawnTime += Time.deltaTime;
-		if (m_lastSpawnTime >= GameSettings.m_instance.obstacleSpawnInterval)
+		if (!GameSettings.m_instance.IsGameOver)
 		{
-			m_lastSpawnTime -= GameSettings.m_instance.obstacleSpawnInterval;
-			SpawnObstacle();
+			m_lastSpawnTime += Time.deltaTime;
+			if (m_lastSpawnTime >= GameSettings.m_instance.obstacleSpawnInterval)
+			{
+				m_lastSpawnTime -= GameSettings.m_instance.obstacleSpawnInterval;
+				SpawnObstacle();
+			}
 		}
 	}
 

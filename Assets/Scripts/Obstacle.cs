@@ -24,6 +24,8 @@ public class Obstacle : MonoBehaviour
 
 		if (transform.position.y < m_destroyMarker.transform.position.y)
 		{
+			GameSettings.m_instance.healthPoint -= 1;
+			Debug.Log("healthPoint = " + GameSettings.m_instance.healthPoint);
 			Destroy(this.gameObject);
 		}
 	}

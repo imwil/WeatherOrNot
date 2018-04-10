@@ -614,6 +614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundSpeed: 1
   obstacleSpeed: 1.5
+  healthPoint: 100
   obstacleSpawnInterval: 2
 --- !u!1001 &1317082478
 Prefab:

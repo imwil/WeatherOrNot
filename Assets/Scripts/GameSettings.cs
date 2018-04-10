@@ -9,7 +9,9 @@ public class GameSettings : MonoBehaviour
 	public float backgroundSpeed;
 	public float obstacleSpeed;
 
-	private bool m_isGameOver;
+	public int healthPoint;
+
+	private bool m_isGameOver = false;
 	public bool IsGameOver { get { return m_isGameOver; } }
 
 	public float obstacleSpawnInterval;
@@ -28,6 +30,9 @@ public class GameSettings : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		
+		if (healthPoint <= 0)
+		{
+			m_isGameOver = true;
+		}
 	}
 }
