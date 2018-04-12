@@ -7,32 +7,15 @@ using System.Linq;
 [System.Flags]
 public enum TKSwipeDirection
 {
-	Left = ( 1 << 0 ),
-	Right = ( 1 << 1 ),
-	Up = ( 1 << 2 ),
-	Down = ( 1 << 3 ),
+	Left = (1 << 0),
+	Right = (1 << 1),
+	Up = (1 << 2),
+	Down = (1 << 3),
 
-	UpLeft = ( 1 << 4 ),
-	DownLeft = ( 1 << 5 ),
-	UpRight = ( 1 << 6 ),
-	DownRight = ( 1 << 7 ),
-
-	Horizontal = ( Left | Right ),
-	Vertical = ( Up | Down ),
-	Cardinal = ( Horizontal | Vertical ),
-
-	DiagonalUp = ( UpLeft | UpRight ),
-	DiagonalDown = ( DownLeft | DownRight ),
-	DiagonalLeft = ( UpLeft | DownLeft ),
-	DiagonalRight = ( UpRight | DownRight ),
-	Diagonal = ( DiagonalUp | DiagonalDown ),
-
-	RightSide = ( Right | DiagonalRight ),
-	LeftSide = ( Left | DiagonalLeft ),
-	TopSide = ( Up | DiagonalUp ),
-	BottomSide = ( Down | DiagonalDown ),
-
-	All = ( Horizontal | Vertical | Diagonal )
+	UpLeft = (Up | Left),
+	DownLeft = (Down | Left),
+	UpRight = (Up | Right),
+	DownRight = (Down | Right)
 }
 
 public class TKSwipeRecognizer : TKAbstractGestureRecognizer

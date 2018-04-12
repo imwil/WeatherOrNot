@@ -190,7 +190,7 @@ public abstract class TKAbstractGestureRecognizer : IComparable<TKAbstractGestur
 	}
 
 
-	internal void reset()
+	internal virtual void reset()
 	{
 		_state = TKGestureRecognizerState.Possible;
 		_trackingTouches.Clear();
