@@ -31,6 +31,7 @@ public class GameSettings : MonoBehaviour
 		lightningRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Lightning gesture recognizer fired: " + r);
+			OstacleSpawner.m_instance.DestroyObstacle(OstacleSpawner.ObstacleType.LIGHTNING);
 		};
 		TouchKit.addGestureRecognizer(lightningRecognizer);
 
@@ -39,6 +40,7 @@ public class GameSettings : MonoBehaviour
 		rainRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Rain gesture recognizer fired: " + r);
+			OstacleSpawner.m_instance.DestroyObstacle(OstacleSpawner.ObstacleType.RAIN);
 		};
 		TouchKit.addGestureRecognizer(rainRecognizer);
 
@@ -50,6 +52,7 @@ public class GameSettings : MonoBehaviour
 		earthQuakeRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Earthquake gesture recognizer fired: " + r);
+			OstacleSpawner.m_instance.DestroyObstacle(OstacleSpawner.ObstacleType.EARTHQUAKE);
 		};
 		TouchKit.addGestureRecognizer(earthQuakeRecognizer);
 
@@ -59,6 +62,7 @@ public class GameSettings : MonoBehaviour
 		volcanoRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Volcano gesture recognizer fired: " + r);
+			OstacleSpawner.m_instance.DestroyObstacle(OstacleSpawner.ObstacleType.VOLCANO);
 		};
 		TouchKit.addGestureRecognizer(volcanoRecognizer);
 	}

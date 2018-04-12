@@ -6,6 +6,7 @@ public class Obstacle : MonoBehaviour
 {
 	public GameObject m_destroyMarker;
 	private Rigidbody2D m_rigidBody2D;
+	public OstacleSpawner.ObstacleType Type { get; set; }
 
 	// Use this for initialization
 	void Start ()
@@ -27,6 +28,7 @@ public class Obstacle : MonoBehaviour
 			GameSettings.m_instance.healthPoint -= 1;
 			Debug.Log("healthPoint = " + GameSettings.m_instance.healthPoint);
 			Destroy(this.gameObject);
+			OstacleSpawner.m_instance.RemoveObstacle(this.Type, this);
 		}
 	}
 }
