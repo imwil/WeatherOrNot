@@ -24,7 +24,43 @@ public class GameSettings : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		var lightningRecognizer = new TKMultiDirectionalSwipeRecognizer();
+		lightningRecognizer.addSwipeDirection(TKSwipeDirection.DownLeft);
+		lightningRecognizer.addSwipeDirection(TKSwipeDirection.Right);
+		lightningRecognizer.addSwipeDirection(TKSwipeDirection.DownLeft);
+		lightningRecognizer.gestureRecognizedEvent += (r) =>
+		{
+			Debug.Log("Lightning gesture recognizer fired: " + r);
+		};
+		TouchKit.addGestureRecognizer(lightningRecognizer);
 
+		var rainRecognizer = new TKMultiDirectionalSwipeRecognizer();
+		rainRecognizer.addSwipeDirection(TKSwipeDirection.DownLeft);
+		rainRecognizer.gestureRecognizedEvent += (r) =>
+		{
+			Debug.Log("Rain gesture recognizer fired: " + r);
+		};
+		TouchKit.addGestureRecognizer(rainRecognizer);
+
+		var earthQuakeRecognizer = new TKMultiDirectionalSwipeRecognizer();
+		earthQuakeRecognizer.addSwipeDirection(TKSwipeDirection.UpRight);
+		earthQuakeRecognizer.addSwipeDirection(TKSwipeDirection.DownRight);
+		earthQuakeRecognizer.addSwipeDirection(TKSwipeDirection.UpRight);
+		earthQuakeRecognizer.addSwipeDirection(TKSwipeDirection.DownRight);
+		earthQuakeRecognizer.gestureRecognizedEvent += (r) =>
+		{
+			Debug.Log("Earthquake gesture recognizer fired: " + r);
+		};
+		TouchKit.addGestureRecognizer(earthQuakeRecognizer);
+
+		var volcanoRecognizer = new TKMultiDirectionalSwipeRecognizer();
+		volcanoRecognizer.addSwipeDirection(TKSwipeDirection.UpRight);
+		volcanoRecognizer.addSwipeDirection(TKSwipeDirection.DownRight);
+		volcanoRecognizer.gestureRecognizedEvent += (r) =>
+		{
+			Debug.Log("Volcano gesture recognizer fired: " + r);
+		};
+		TouchKit.addGestureRecognizer(volcanoRecognizer);
 	}
 	
 	// Update is called once per frame
