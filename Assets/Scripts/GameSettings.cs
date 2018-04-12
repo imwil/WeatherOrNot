@@ -55,6 +55,14 @@ public class GameSettings : MonoBehaviour
 			ObstacleSpawner.m_instance.DestroyObstacle(ObstacleSpawner.ObstacleType.EARTHQUAKE);
 		};
 		TouchKit.addGestureRecognizer(earthQuakeRecognizer);
+		
+		var stormRecognizer = new TKDiscreteCurveRecognizer();
+		stormRecognizer.gestureRecognizedEvent += (r) =>
+		{
+			Debug.Log("Storm gesture recognizer fired: " + r);
+			ObstacleSpawner.m_instance.DestroyObstacle(ObstacleSpawner.ObstacleType.STORM);
+		};
+		TouchKit.addGestureRecognizer(stormRecognizer);
 
 		var volcanoRecognizer = new TKMultiDirectionalSwipeRecognizer();
 		volcanoRecognizer.addSwipeDirection(TKSwipeDirection.UpRight);
