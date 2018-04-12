@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using System.Linq;
 
-public class OstacleSpawner : MonoBehaviour
+public class ObstacleSpawner : MonoBehaviour
 {
 	public enum ObstacleType
 	{
@@ -14,7 +14,7 @@ public class OstacleSpawner : MonoBehaviour
 		STORM,
 		VOLCANO
 	};
-	public static OstacleSpawner m_instance = null;
+	public static ObstacleSpawner m_instance = null;
 
 	public Obstacle[] m_obstaclePrefabs;
 	public int[] m_obstacleAmountChance;
