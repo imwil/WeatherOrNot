@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4541891632428826}
   - component: {fileID: 114208785361337860}
   m_Layer: 0
-  m_Name: ObstacleSpawner
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,6 +59,6 @@ MonoBehaviour:
   - {fileID: 114605830175633998, guid: 47b1918f66cab8b458fec3ffbc7a5687, type: 2}
   m_obstacleAmountChance: 4b0000001400000005000000
   m_obstacleHolders:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1446478938210868, guid: 5316c9efc1a083044a150d98e5fd7cb7, type: 2}
+  - {fileID: 1446478938210868, guid: 5cdd1d1728bdd49438895d10ea099c51, type: 2}
+  - {fileID: 1446478938210868, guid: 5f187de1c0b1d8c4b9ea1752ffe9c336, type: 2}

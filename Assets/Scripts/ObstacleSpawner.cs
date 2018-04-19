@@ -40,6 +40,11 @@ public class ObstacleSpawner : MonoBehaviour
 		{
 			m_obstacles[i] = new List<Obstacle>();
 		}
+
+		for (int i = 0; i < m_obstacleHolders.Length; i++)
+		{
+			m_obstacleHolders[i] = Instantiate<GameObject>(m_obstacleHolders[i], transform.parent);
+		}
 	}
 
 	// Use this for initialization
