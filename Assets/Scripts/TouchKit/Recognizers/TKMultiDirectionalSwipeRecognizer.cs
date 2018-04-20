@@ -192,10 +192,6 @@ public class TKMultiDirectionalSwipeRecognizer : TKAbstractGestureRecognizer
 					swipeDirections[currDirIdx].isSuccess = true;
 				}
 			}
-			else
-			{
-				int a = 0;
-			}
 			//if (!swipeDirections[currDirIdx].isSuccess)
 			//{
 			//    Debug.LogFormat("Direction at index {0} is recognized", currDirIdx);
