@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameSettings : MonoBehaviour
 {
@@ -8,22 +9,64 @@ public class GameSettings : MonoBehaviour
 
 	public float backgroundSpeed;
 	public float obstacleSpeed;
-
-	public int healthPoint;
-
-	private bool m_isGameOver = false;
-	public bool IsGameOver { get { return m_isGameOver; } }
-
 	public float obstacleSpawnInterval;
+	public int healthPoint;
+	public Crew crew;
+	public Text labelScore;
+	
+	public enum Lane
+	{
+		LEFT, MIDDLE, RIGHT, COUNT
+	};
+	public bool IsGameOver { get; private set; }
+
+	private int m_score = 0;
+	public int Score
+	{
+		get
+		{
+			return m_score;
+		}
+		set
+		{
+			m_score = value;
+			labelScore.text = m_score.ToString();
+		}
+	}
 
 	private void Awake()
 	{
 		m_instance = this;
+		Score = 0;
 	} 
 
 	// Use this for initialization
 	void Start ()
 	{
+		var moveLeftRecognizer = new TKMultiDirectionalSwipeRecognizer();
+		moveLeftRecognizer.addSwipeDirection(TKSwipeDirection.Left);
+		moveLeftRecognizer.gestureRecognizedEvent += (r) =>
+		{
+			Debug.Log("Move Left gesture recognizer fired: " + r);
+			if (crew.Lane > GameSettings.Lane.LEFT)
+			{
+				crew.Lane -= 1;
+			}
+		};
+		TouchKit.addGestureRecognizer(moveLeftRecognizer);
+
+		var moveRightRecognizer = new TKMultiDirectionalSwipeRecognizer();
+		moveRightRecognizer.addSwipeDirection(TKSwipeDirection.Right);
+		moveRightRecognizer.gestureRecognizedEvent += (r) =>
+		{
+			Debug.Log("Move Right gesture recognizer fired: " + r);
+			if (crew.Lane < GameSettings.Lane.RIGHT)
+			{
+				crew.Lane += 1;
+			}
+		};
+		TouchKit.addGestureRecognizer(moveRightRecognizer);
+
 		var lightningRecognizer = new TKMultiDirectionalSwipeRecognizer();
 		lightningRecognizer.addSwipeDirection(TKSwipeDirection.DownLeft);
 		lightningRecognizer.addSwipeDirection(TKSwipeDirection.Right);
@@ -31,7 +74,7 @@ public class GameSettings : MonoBehaviour
 		lightningRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Lightning gesture recognizer fired: " + r);
-			ObstacleSpawner.m_instance.DestroyObstacle(ObstacleSpawner.ObstacleType.LIGHTNING);
+			ObstacleSpawner.m_instance.DestroyObstacle(crew.Lane, ObstacleSpawner.ObstacleType.LIGHTNING);
 		};
 		TouchKit.addGestureRecognizer(lightningRecognizer);
 
@@ -40,7 +83,7 @@ public class GameSettings : MonoBehaviour
 		rainRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Rain gesture recognizer fired: " + r);
-			ObstacleSpawner.m_instance.DestroyObstacle(ObstacleSpawner.ObstacleType.RAIN);
+			ObstacleSpawner.m_instance.DestroyObstacle(crew.Lane, ObstacleSpawner.ObstacleType.RAIN);
 		};
 		TouchKit.addGestureRecognizer(rainRecognizer);
 
@@ -52,7 +95,7 @@ public class GameSettings : MonoBehaviour
 		earthQuakeRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Earthquake gesture recognizer fired: " + r);
-			ObstacleSpawner.m_instance.DestroyObstacle(ObstacleSpawner.ObstacleType.EARTHQUAKE);
+			ObstacleSpawner.m_instance.DestroyObstacle(crew.Lane, ObstacleSpawner.ObstacleType.EARTHQUAKE);
 		};
 		TouchKit.addGestureRecognizer(earthQuakeRecognizer);
 		
@@ -60,7 +103,7 @@ public class GameSettings : MonoBehaviour
 		stormRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Storm gesture recognizer fired: " + r);
-			ObstacleSpawner.m_instance.DestroyObstacle(ObstacleSpawner.ObstacleType.STORM);
+			ObstacleSpawner.m_instance.DestroyObstacle(crew.Lane, ObstacleSpawner.ObstacleType.STORM);
 		};
 		TouchKit.addGestureRecognizer(stormRecognizer);
 
@@ -70,7 +113,7 @@ public class GameSettings : MonoBehaviour
 		volcanoRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Volcano gesture recognizer fired: " + r);
-			ObstacleSpawner.m_instance.DestroyObstacle(ObstacleSpawner.ObstacleType.VOLCANO);
+			ObstacleSpawner.m_instance.DestroyObstacle(crew.Lane, ObstacleSpawner.ObstacleType.VOLCANO);
 		};
 		TouchKit.addGestureRecognizer(volcanoRecognizer);
 	}
@@ -80,7 +123,7 @@ public class GameSettings : MonoBehaviour
 	{
 		if (healthPoint <= 0)
 		{
-			m_isGameOver = true;
+			IsGameOver = true;
 		}
 	}
 }

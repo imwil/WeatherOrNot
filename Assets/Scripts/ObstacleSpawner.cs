@@ -22,7 +22,7 @@ public class ObstacleSpawner : MonoBehaviour
 
 	private float m_lastSpawnTime;
 	private bool[] m_isSpawningLane = new bool[3] { false, false, false };
-	private List<Obstacle>[] m_obstacles;
+	private List<Obstacle>[][] m_obstacles;
 
 	private void Awake()
 	{
@@ -35,10 +35,14 @@ public class ObstacleSpawner : MonoBehaviour
 		}
 		Assert.AreEqual(100, totalChance, "ERROR: Total obstacle amount chance must be equal to 100!");
 
-		m_obstacles = new List<Obstacle>[m_obstaclePrefabs.Length];
-		for (int i = 0; i < m_obstacles.Length; i++)
+		m_obstacles = new List<Obstacle>[(int)GameSettings.Lane.COUNT][];
+		for (int i = 0; i < (int)GameSettings.Lane.COUNT; i++)
 		{
-			m_obstacles[i] = new List<Obstacle>();
+			m_obstacles[i] = new List<Obstacle>[m_obstaclePrefabs.Length];
+			for (int j = 0; j < m_obstacles[i].Length; j++)
+			{
+				m_obstacles[i][j] = new List<Obstacle>();
+			}
 		}
 
 		for (int i = 0; i < m_obstacleHolders.Length; i++)
@@ -97,7 +101,8 @@ public class ObstacleSpawner : MonoBehaviour
 				Obstacle prefab = m_obstaclePrefabs[idx];
 				Obstacle obstacle = Instantiate<Obstacle>(prefab, m_obstacleHolders[i].transform);
 				obstacle.Type = (ObstacleType)idx;
-				m_obstacles[idx].Add(obstacle);
+				obstacle.Lane = (GameSettings.Lane)i;
+				m_obstacles[i][idx].Add(obstacle);
 				m_isSpawningLane[i] = false;
 			}
 		}
@@ -109,17 +114,18 @@ public class ObstacleSpawner : MonoBehaviour
 		
 	}
 
-	public void DestroyObstacle(ObstacleType type)
+	public void DestroyObstacle(GameSettings.Lane lane, ObstacleType type)
 	{
-		if (m_obstacles[(int)type].Count > 0)
+		if (m_obstacles[(int)lane][(int)type].Count > 0)
 		{
-			Destroy(m_obstacles[(int)type].FirstOrDefault().gameObject);
-			RemoveObstacle(type, m_obstacles[(int)type].FirstOrDefault());
+			Destroy(m_obstacles[(int)lane][(int)type].FirstOrDefault().gameObject);
+			RemoveObstacle(lane, type, m_obstacles[(int)lane][(int)type].FirstOrDefault());
+			GameSettings.m_instance.Score++;
 		}
 	}
 
-	public void RemoveObstacle(ObstacleType type, Obstacle obstacle)
+	public void RemoveObstacle(GameSettings.Lane lane, ObstacleType type, Obstacle obstacle)
 	{
-		m_obstacles[(int)type].Remove(obstacle);
+		m_obstacles[(int)lane][(int)type].Remove(obstacle);
 	}
 }
