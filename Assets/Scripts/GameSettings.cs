@@ -13,6 +13,7 @@ public class GameSettings : MonoBehaviour
 	public int healthPoint;
 	public Crew crew;
 	public Text labelScore;
+	public SpriteRenderer[] rects;
 	
 	public enum Lane
 	{
@@ -20,8 +21,8 @@ public class GameSettings : MonoBehaviour
 	};
 	public bool IsGameOver { get; private set; }
 
-	private int m_score = 0;
-	public int Score
+	private float m_score = 0;
+	public float Score
 	{
 		get
 		{
@@ -30,9 +31,11 @@ public class GameSettings : MonoBehaviour
 		set
 		{
 			m_score = value;
-			labelScore.text = m_score.ToString();
+			int tmp = (int)m_score;
+			labelScore.text = (tmp - tmp % 10).ToString();
 		}
 	}
+	public float UnsavedScore { get; set; }
 
 	private void Awake()
 	{
@@ -43,6 +46,20 @@ public class GameSettings : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		Debug.Log(rects[0].transform.position + " " + rects[0].bounds.size);
+		Debug.Log("(" + rects[0].size.x * rects[0].transform.localScale.x + ", " + rects[0].size.y * rects[0].transform.localScale.y + ")");
+		var tapLeftRecognizer = new TKTapRecognizer();
+		tapLeftRecognizer.boundaryFrame = new TKRect(rects[0].transform.position.x, rects[0].transform.position.y, rects[0].bounds.size.x, rects[0].bounds.size.y);
+		tapLeftRecognizer.gestureRecognizedEvent += (r) =>
+		{
+			Debug.Log("tap recognizer fired: " + r);
+			if (crew.Lane > GameSettings.Lane.LEFT)
+			{
+				crew.Lane -= 1;
+			}
+		};
+		TouchKit.addGestureRecognizer(tapLeftRecognizer);
+
 		var moveLeftRecognizer = new TKMultiDirectionalSwipeRecognizer();
 		moveLeftRecognizer.addSwipeDirection(TKSwipeDirection.Left);
 		moveLeftRecognizer.gestureRecognizedEvent += (r) =>

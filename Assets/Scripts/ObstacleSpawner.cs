@@ -21,6 +21,7 @@ public class ObstacleSpawner : MonoBehaviour
 	public GameObject[] m_obstacleHolders;
 
 	private float m_lastSpawnTime;
+	private float m_spawnTimeOffset = -1.0f;
 	private bool[] m_isSpawningLane = new bool[3] { false, false, false };
 	private List<Obstacle>[][] m_obstacles;
 
@@ -62,9 +63,14 @@ public class ObstacleSpawner : MonoBehaviour
 		if (!GameSettings.m_instance.IsGameOver)
 		{
 			m_lastSpawnTime += Time.deltaTime;
-			if (m_lastSpawnTime >= GameSettings.m_instance.obstacleSpawnInterval)
+			if (m_spawnTimeOffset < 0.0f)
+			{
+				m_spawnTimeOffset = Random.Range(0.0f, GameSettings.m_instance.obstacleSpawnInterval / 2);
+			}
+			if (m_lastSpawnTime >= GameSettings.m_instance.obstacleSpawnInterval - m_spawnTimeOffset)
 			{
 				m_lastSpawnTime -= GameSettings.m_instance.obstacleSpawnInterval;
+				m_spawnTimeOffset = -1.0f;
 				SpawnObstacle();
 			}
 		}
@@ -72,38 +78,39 @@ public class ObstacleSpawner : MonoBehaviour
 
 	private void SpawnObstacle()
 	{
-		int random = Random.Range(0, 100);
-		int obstacleAmount = 0;
-		do
-		{
-			random -= m_obstacleAmountChance[obstacleAmount];
-			obstacleAmount++;
-		}
-		while (random >= 0);
-		
-		for (int i = 0; i < obstacleAmount; i++)
-		{
-			int index = -1;
-			do
-			{
-				index = Random.Range(0, 3);
-			}
-			while (m_isSpawningLane[index]);
+		//int random = Random.Range(0, 100);
+		//int obstacleAmount = 0;
+		//do
+		//{
+		//	random -= m_obstacleAmountChance[obstacleAmount];
+		//	obstacleAmount++;
+		//}
+		//while (random >= 0);
 
-			m_isSpawningLane[index] = true;
-		}
+		//for (int i = 0; i < obstacleAmount; i++)
+		//{
+		//	int index = -1;
+		//	do
+		//	{
+		//		index = Random.Range(0, 3);
+		//	}
+		//	while (m_isSpawningLane[index]);
 
-		for (int i = 0; i < m_isSpawningLane.Length; i++)
+		//	m_isSpawningLane[index] = true;
+		//}
+
+		//for (int i = 0; i < m_isSpawningLane.Length; i++)
 		{
-			if (m_isSpawningLane[i])
+			//	if (m_isSpawningLane[i])
+			int lane = Random.Range((int)GameSettings.Lane.LEFT, (int)GameSettings.Lane.COUNT);
 			{
 				int idx = Random.Range(0, m_obstaclePrefabs.Length);
 				Obstacle prefab = m_obstaclePrefabs[idx];
-				Obstacle obstacle = Instantiate<Obstacle>(prefab, m_obstacleHolders[i].transform);
+				Obstacle obstacle = Instantiate<Obstacle>(prefab, m_obstacleHolders[lane].transform);
 				obstacle.Type = (ObstacleType)idx;
-				obstacle.Lane = (GameSettings.Lane)i;
-				m_obstacles[i][idx].Add(obstacle);
-				m_isSpawningLane[i] = false;
+				obstacle.Lane = (GameSettings.Lane)lane;
+				m_obstacles[lane][idx].Add(obstacle);
+				//m_isSpawningLane[i] = false;
 			}
 		}
 	}
@@ -120,7 +127,6 @@ public class ObstacleSpawner : MonoBehaviour
 		{
 			Destroy(m_obstacles[(int)lane][(int)type].FirstOrDefault().gameObject);
 			RemoveObstacle(lane, type, m_obstacles[(int)lane][(int)type].FirstOrDefault());
-			GameSettings.m_instance.Score++;
 		}
 	}
 

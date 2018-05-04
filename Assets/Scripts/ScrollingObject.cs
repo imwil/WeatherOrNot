@@ -20,5 +20,8 @@ public class ScrollingObject : MonoBehaviour
 		{
 			m_rigidBody2D.velocity = Vector2.zero;
 		}
+
+		GameSettings.m_instance.UnsavedScore = GameSettings.m_instance.backgroundSpeed * Time.deltaTime * 10;
+		GameSettings.m_instance.Score += GameSettings.m_instance.backgroundSpeed * Time.deltaTime * 5;
 	}
 }
