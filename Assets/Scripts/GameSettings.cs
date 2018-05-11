@@ -12,6 +12,9 @@ public class GameSettings : MonoBehaviour
 	public int healthPoint;
 	public Crew crew;
 	public SpriteRenderer[] rects;
+
+	public int scoreMultiplier;
+	public int slowMultiplier;
 	
 	public enum Lane
 	{

@@ -6,7 +6,6 @@ using System.Linq;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-	private const float defaultTimeOffset = 0f;
 	public enum ObstacleType
 	{
 		LIGHTNING = 0,
@@ -23,8 +22,9 @@ public class ObstacleSpawner : MonoBehaviour
 
 	private float m_lastSpawnTime;
 	private float m_spawnTimeOffset;
-	//private bool[] m_isSpawningLane = new bool[3] { false, false, false };
 	private List<Obstacle>[] m_obstacles;
+
+	private const float defaultTimeOffset = 0f;
 
 	private void Awake()
 	{

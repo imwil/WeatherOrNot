@@ -43,7 +43,7 @@ public class ScoreManager : MonoBehaviour
 		lastTickTime += Time.deltaTime;
 		if (lastTickTime >= tickInterval)
 		{
-			Score += scorePerTick;
+			Score += scorePerTick * (PowerUpManager.instance[(int)PowerUpManager.Type.DOUBLE_SCORE] ? GameSettings.instance.scoreMultiplier : 2) ;
 			lastTickTime -= tickInterval;
 		}
 	}
