@@ -752,6 +752,7 @@ GameObject:
   - component: {fileID: 1248574943}
   - component: {fileID: 1248574942}
   - component: {fileID: 1248574946}
+  - component: {fileID: 1248574947}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -840,11 +841,24 @@ MonoBehaviour:
   obstacleSpeed: 1.5
   healthPoint: 100
   crew: {fileID: 535302545}
-  labelScore: {fileID: 778029146}
   rects:
   - {fileID: 1172048996}
   - {fileID: 333500585}
   - {fileID: 2082498506}
+--- !u!114 &1248574947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1248574941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b033a0c324cd0b418145b7541affc34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  labelScore: {fileID: 778029146}
+  scorePerTick: 1
+  tickPerSecond: 15
 --- !u!1 &1261011742
 GameObject:
   m_ObjectHideFlags: 0

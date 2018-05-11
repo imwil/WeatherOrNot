@@ -11,7 +11,6 @@ public class GameSettings : MonoBehaviour
 	public float obstacleSpeed;
 	public int healthPoint;
 	public Crew crew;
-	public Text labelScore;
 	public SpriteRenderer[] rects;
 	
 	public enum Lane
@@ -20,26 +19,9 @@ public class GameSettings : MonoBehaviour
 	};
 	public bool IsGameOver { get; private set; }
 
-	private float m_score = 0;
-	public float Score
-	{
-		get
-		{
-			return m_score;
-		}
-		set
-		{
-			m_score = value;
-			int tmp = (int)m_score;
-			labelScore.text = (tmp - tmp % 10).ToString();
-		}
-	}
-	public float UnsavedScore { get; set; }
-
 	private void Awake()
 	{
 		instance = this;
-		Score = 0;
 	} 
 
 	// Use this for initialization
