@@ -9,7 +9,6 @@ public class GameSettings : MonoBehaviour
 
 	public float backgroundSpeed;
 	public float obstacleSpeed;
-	public float obstacleSpawnInterval;
 	public int healthPoint;
 	public Crew crew;
 	public Text labelScore;
@@ -91,7 +90,7 @@ public class GameSettings : MonoBehaviour
 		lightningRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Lightning gesture recognizer fired: " + r);
-			ObstacleSpawner.m_instance.DestroyObstacle(crew.Lane, ObstacleSpawner.ObstacleType.LIGHTNING);
+			ObstacleManager.m_instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.LIGHTNING);
 		};
 		TouchKit.addGestureRecognizer(lightningRecognizer);
 
@@ -100,7 +99,7 @@ public class GameSettings : MonoBehaviour
 		rainRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Rain gesture recognizer fired: " + r);
-			ObstacleSpawner.m_instance.DestroyObstacle(crew.Lane, ObstacleSpawner.ObstacleType.RAIN);
+			ObstacleManager.m_instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.RAIN);
 		};
 		TouchKit.addGestureRecognizer(rainRecognizer);
 
@@ -112,7 +111,7 @@ public class GameSettings : MonoBehaviour
 		earthQuakeRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Earthquake gesture recognizer fired: " + r);
-			ObstacleSpawner.m_instance.DestroyObstacle(crew.Lane, ObstacleSpawner.ObstacleType.EARTHQUAKE);
+			ObstacleManager.m_instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.EARTHQUAKE);
 		};
 		TouchKit.addGestureRecognizer(earthQuakeRecognizer);
 		
@@ -120,7 +119,7 @@ public class GameSettings : MonoBehaviour
 		stormRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Storm gesture recognizer fired: " + r);
-			ObstacleSpawner.m_instance.DestroyObstacle(crew.Lane, ObstacleSpawner.ObstacleType.STORM);
+			ObstacleManager.m_instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.STORM);
 		};
 		TouchKit.addGestureRecognizer(stormRecognizer);
 
@@ -130,7 +129,7 @@ public class GameSettings : MonoBehaviour
 		volcanoRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Volcano gesture recognizer fired: " + r);
-			ObstacleSpawner.m_instance.DestroyObstacle(crew.Lane, ObstacleSpawner.ObstacleType.VOLCANO);
+			ObstacleManager.m_instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.VOLCANO);
 		};
 		TouchKit.addGestureRecognizer(volcanoRecognizer);
 	}

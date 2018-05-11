@@ -35,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 1440169256154256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -51,14 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3505e164e88742840adb35473e919173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obstaclePrefabs:
+  obstaclePrefabs:
   - {fileID: 114717481705537746, guid: c3516747fbf6f044281d052fae0b7cc5, type: 2}
   - {fileID: 114485262540361444, guid: 38843c3142383b14d91a19a80d4538d9, type: 2}
   - {fileID: 114900239294416900, guid: e2544531489e1074c81aa562081f3cc3, type: 2}
   - {fileID: 114124989490350970, guid: aa0d325fe6ed4b746872536a18cf6ba8, type: 2}
   - {fileID: 114605830175633998, guid: 47b1918f66cab8b458fec3ffbc7a5687, type: 2}
-  m_obstacleAmountChance: 4b0000001400000005000000
-  m_obstacleHolders:
-  - {fileID: 1446478938210868, guid: 5316c9efc1a083044a150d98e5fd7cb7, type: 2}
-  - {fileID: 1446478938210868, guid: 5cdd1d1728bdd49438895d10ea099c51, type: 2}
-  - {fileID: 1446478938210868, guid: 5f187de1c0b1d8c4b9ea1752ffe9c336, type: 2}
+  spawnInterval: 2

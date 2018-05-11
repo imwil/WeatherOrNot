@@ -515,6 +515,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 926964116}
+  - component: {fileID: 926964117}
   m_Layer: 0
   m_Name: Obstacles
   m_TagString: Untagged
@@ -531,11 +532,28 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1061828740}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &926964117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 926964115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583ff746f1d96a742a8088c020c85ece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_holders:
+  - {fileID: 1446478938210868, guid: 5316c9efc1a083044a150d98e5fd7cb7, type: 2}
+  - {fileID: 1446478938210868, guid: 5cdd1d1728bdd49438895d10ea099c51, type: 2}
+  - {fileID: 1446478938210868, guid: 5f187de1c0b1d8c4b9ea1752ffe9c336, type: 2}
+  spawnerPrefab: {fileID: 114208785361337860, guid: f7e2aad7266485248b6a47d34e3ea149,
+    type: 2}
+  spawners: []
 --- !u!1 &1020424334
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,53 +616,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1061828739
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 926964116}
-    m_Modifications:
-    - target: {fileID: 4541891632428826, guid: f7e2aad7266485248b6a47d34e3ea149, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4541891632428826, guid: f7e2aad7266485248b6a47d34e3ea149, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4541891632428826, guid: f7e2aad7266485248b6a47d34e3ea149, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4541891632428826, guid: f7e2aad7266485248b6a47d34e3ea149, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4541891632428826, guid: f7e2aad7266485248b6a47d34e3ea149, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4541891632428826, guid: f7e2aad7266485248b6a47d34e3ea149, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4541891632428826, guid: f7e2aad7266485248b6a47d34e3ea149, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4541891632428826, guid: f7e2aad7266485248b6a47d34e3ea149, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: f7e2aad7266485248b6a47d34e3ea149, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &1061828740 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4541891632428826, guid: f7e2aad7266485248b6a47d34e3ea149,
-    type: 2}
-  m_PrefabInternal: {fileID: 1061828739}
 --- !u!1001 &1111592948
 Prefab:
   m_ObjectHideFlags: 0
@@ -867,7 +838,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundSpeed: 1
   obstacleSpeed: 1.5
-  obstacleSpawnInterval: 1
   healthPoint: 100
   crew: {fileID: 535302545}
   labelScore: {fileID: 778029146}

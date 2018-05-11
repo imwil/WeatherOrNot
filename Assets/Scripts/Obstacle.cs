@@ -29,7 +29,7 @@ public class Obstacle : MonoBehaviour
 			GameSettings.m_instance.healthPoint -= 1;
 			Debug.Log("healthPoint = " + GameSettings.m_instance.healthPoint);
 			Destroy(this.gameObject);
-			ObstacleSpawner.m_instance.RemoveObstacle(this.Lane, this.Type, this);
+			ObstacleManager.m_instance.spawners[(int)Lane].RemoveObstacle(this.Type, this);
 		}
 	}
 }
