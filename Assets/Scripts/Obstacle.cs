@@ -13,23 +13,23 @@ public class Obstacle : MonoBehaviour
 	void Start ()
 	{
 		m_rigidBody2D = GetComponent<Rigidbody2D>();
-		m_rigidBody2D.velocity = Vector2.down * GameSettings.m_instance.obstacleSpeed;
+		m_rigidBody2D.velocity = Vector2.down * GameSettings.instance.obstacleSpeed;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if (GameSettings.m_instance.IsGameOver)
+		if (GameSettings.instance.IsGameOver)
 		{
 			m_rigidBody2D.velocity = Vector2.zero;
 		}
 
 		if (transform.position.y < m_destroyMarker.transform.position.y)
 		{
-			GameSettings.m_instance.healthPoint -= 1;
-			Debug.Log("healthPoint = " + GameSettings.m_instance.healthPoint);
+			GameSettings.instance.healthPoint -= 1;
+			Debug.Log("healthPoint = " + GameSettings.instance.healthPoint);
 			Destroy(this.gameObject);
-			ObstacleManager.m_instance.spawners[(int)Lane].RemoveObstacle(this.Type, this);
+			ObstacleManager.instance.spawners[(int)Lane].RemoveObstacle(this.Type, this);
 		}
 	}
 }

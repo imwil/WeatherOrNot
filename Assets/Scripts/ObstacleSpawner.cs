@@ -45,7 +45,7 @@ public class ObstacleSpawner : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (!GameSettings.m_instance.IsGameOver)
+		if (!GameSettings.instance.IsGameOver)
 		{
 			m_lastSpawnTime += Time.deltaTime;
 			if (m_spawnTimeOffset == defaultTimeOffset)

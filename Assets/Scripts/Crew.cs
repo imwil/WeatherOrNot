@@ -38,7 +38,6 @@ public class Crew : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		//transform.position = Vector3.SmoothDamp(transform.position, Target, ref velocity, smoothTime);
 		transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
 	}
 }

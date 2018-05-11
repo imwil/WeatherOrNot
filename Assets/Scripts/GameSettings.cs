@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameSettings : MonoBehaviour
 {
-	public static GameSettings m_instance = null;
+	public static GameSettings instance = null;
 
 	public float backgroundSpeed;
 	public float obstacleSpeed;
@@ -38,7 +38,7 @@ public class GameSettings : MonoBehaviour
 
 	private void Awake()
 	{
-		m_instance = this;
+		instance = this;
 		Score = 0;
 	} 
 
@@ -90,7 +90,7 @@ public class GameSettings : MonoBehaviour
 		lightningRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Lightning gesture recognizer fired: " + r);
-			ObstacleManager.m_instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.LIGHTNING);
+			ObstacleManager.instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.LIGHTNING);
 		};
 		TouchKit.addGestureRecognizer(lightningRecognizer);
 
@@ -99,7 +99,7 @@ public class GameSettings : MonoBehaviour
 		rainRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Rain gesture recognizer fired: " + r);
-			ObstacleManager.m_instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.RAIN);
+			ObstacleManager.instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.RAIN);
 		};
 		TouchKit.addGestureRecognizer(rainRecognizer);
 
@@ -111,7 +111,7 @@ public class GameSettings : MonoBehaviour
 		earthQuakeRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Earthquake gesture recognizer fired: " + r);
-			ObstacleManager.m_instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.EARTHQUAKE);
+			ObstacleManager.instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.EARTHQUAKE);
 		};
 		TouchKit.addGestureRecognizer(earthQuakeRecognizer);
 		
@@ -119,7 +119,7 @@ public class GameSettings : MonoBehaviour
 		stormRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Storm gesture recognizer fired: " + r);
-			ObstacleManager.m_instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.STORM);
+			ObstacleManager.instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.STORM);
 		};
 		TouchKit.addGestureRecognizer(stormRecognizer);
 
@@ -129,7 +129,7 @@ public class GameSettings : MonoBehaviour
 		volcanoRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Volcano gesture recognizer fired: " + r);
-			ObstacleManager.m_instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.VOLCANO);
+			ObstacleManager.instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.VOLCANO);
 		};
 		TouchKit.addGestureRecognizer(volcanoRecognizer);
 	}

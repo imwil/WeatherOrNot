@@ -7,13 +7,13 @@ public class ObstacleManager : MonoBehaviour
 	public GameObject[] m_holders;
 	public ObstacleSpawner spawnerPrefab;
 
-	public static ObstacleManager m_instance;
+	public static ObstacleManager instance;
 
 	[HideInInspector] public ObstacleSpawner[] spawners;
 
 	private void Awake()
 	{
-		m_instance = this;
+		instance = this;
 
 		spawners = new ObstacleSpawner[(int)GameSettings.Lane.COUNT];
 		for (int i = 0; i < (int)GameSettings.Lane.COUNT; i++)

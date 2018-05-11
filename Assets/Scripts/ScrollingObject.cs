@@ -10,18 +10,18 @@ public class ScrollingObject : MonoBehaviour
 	void Start ()
 	{
 		m_rigidBody2D = GetComponent<Rigidbody2D>();
-		m_rigidBody2D.velocity = Vector2.down * GameSettings.m_instance.backgroundSpeed;
+		m_rigidBody2D.velocity = Vector2.down * GameSettings.instance.backgroundSpeed;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if (GameSettings.m_instance.IsGameOver)
+		if (GameSettings.instance.IsGameOver)
 		{
 			m_rigidBody2D.velocity = Vector2.zero;
 		}
 
-		GameSettings.m_instance.UnsavedScore = GameSettings.m_instance.backgroundSpeed * Time.deltaTime * 10;
-		GameSettings.m_instance.Score += GameSettings.m_instance.backgroundSpeed * Time.deltaTime * 5;
+		GameSettings.instance.UnsavedScore = GameSettings.instance.backgroundSpeed * Time.deltaTime * 10;
+		GameSettings.instance.Score += GameSettings.instance.backgroundSpeed * Time.deltaTime * 5;
 	}
 }
