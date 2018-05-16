@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-	public Text labelScore;
+	public static ScoreManager instance;
 
-	private int m_score = 0;
-	public int Score
+	public Text labelScore;
+	public float baseScorePerTick;
+	public int tickPerSecond;
+	public float multiplier;
+
+	private float m_score = 0;
+	public float Score
 	{
 		get
 		{
@@ -17,24 +22,18 @@ public class ScoreManager : MonoBehaviour
 		set
 		{
 			m_score = value;
-			labelScore.text = m_score.ToString();
+			labelScore.text = ((int)m_score).ToString();
 		}
 	}
-	public int scorePerTick;
-	public int tickPerSecond;
+	public float ScorePerTick { get; set; }
 
 	private float tickInterval;
 	private float lastTickTime;
 
 	private void Awake()
 	{
+		instance = this;
 		tickInterval = 1f / tickPerSecond;
-	}
-
-	// Use this for initialization
-	void Start ()
-	{
-		
 	}
 	
 	// Update is called once per frame
@@ -43,8 +42,20 @@ public class ScoreManager : MonoBehaviour
 		lastTickTime += Time.deltaTime;
 		if (lastTickTime >= tickInterval)
 		{
-			Score += scorePerTick * (PowerUpManager.instance[(int)PowerUpManager.Type.DOUBLE_SCORE] ? GameSettings.instance.scoreMultiplier : 2) ;
+			Score += ScorePerTick;
 			lastTickTime -= tickInterval;
+		}
+	}
+
+	public void ApplyMultiplier(bool isApply)
+	{
+		if (isApply)
+		{
+			ScorePerTick = baseScorePerTick * multiplier;
+		}
+		else
+		{
+			ScorePerTick = baseScorePerTick;
 		}
 	}
 }

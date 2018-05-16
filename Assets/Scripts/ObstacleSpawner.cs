@@ -16,7 +16,6 @@ public class ObstacleSpawner : MonoBehaviour
 	};
 
 	public Obstacle[] obstaclePrefabs;
-	public float spawnInterval;
 
 	public GameSettings.Lane Lane { get; set; }
 
@@ -50,11 +49,11 @@ public class ObstacleSpawner : MonoBehaviour
 			m_lastSpawnTime += Time.deltaTime;
 			if (m_spawnTimeOffset == defaultTimeOffset)
 			{
-				m_spawnTimeOffset = Random.Range(0f, 2 * spawnInterval);
+				m_spawnTimeOffset = Random.Range(0f, 2 * SpeedManager.instance.ObstacleSpawnInterval);
 			}
-			if (m_lastSpawnTime >= spawnInterval + m_spawnTimeOffset)
+			if (m_lastSpawnTime >= SpeedManager.instance.ObstacleSpawnInterval + m_spawnTimeOffset)
 			{
-				m_lastSpawnTime -= (spawnInterval + m_spawnTimeOffset);
+				m_lastSpawnTime -= (SpeedManager.instance.ObstacleSpawnInterval + m_spawnTimeOffset);
 				m_spawnTimeOffset = defaultTimeOffset;
 				SpawnObstacle();
 			}

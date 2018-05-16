@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ObstacleManager : MonoBehaviour
 {
+	public static ObstacleManager instance;
+
 	public GameObject[] m_holders;
 	public ObstacleSpawner spawnerPrefab;
-
-	public static ObstacleManager instance;
 
 	[HideInInspector] public ObstacleSpawner[] spawners;
 
@@ -21,16 +21,5 @@ public class ObstacleManager : MonoBehaviour
 			spawners[i] = Instantiate<ObstacleSpawner>(spawnerPrefab, m_holders[i].transform.position, Quaternion.identity, this.transform);
 			spawners[i].Lane = (GameSettings.Lane)i;
 		}
-	}
-
-	// Use this for initialization
-	void Start ()
-	{
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		
 	}
 }

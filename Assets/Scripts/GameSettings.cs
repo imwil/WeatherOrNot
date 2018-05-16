@@ -7,14 +7,9 @@ public class GameSettings : MonoBehaviour
 {
 	public static GameSettings instance = null;
 
-	public float backgroundSpeed;
-	public float obstacleSpeed;
 	public int healthPoint;
 	public Crew crew;
 	public SpriteRenderer[] rects;
-
-	public int scoreMultiplier;
-	public int slowMultiplier;
 	
 	public enum Lane
 	{

@@ -4,30 +4,41 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-	public GameObject m_destroyMarker;
-	private Rigidbody2D m_rigidBody2D;
 	public ObstacleSpawner.ObstacleType Type { get; set; }
 	public GameSettings.Lane Lane { get; set; }
+
+	private Rigidbody2D m_rigidBody2D;
 
 	// Use this for initialization
 	void Start ()
 	{
 		m_rigidBody2D = GetComponent<Rigidbody2D>();
-		m_rigidBody2D.velocity = Vector2.down * GameSettings.instance.obstacleSpeed;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		m_rigidBody2D.velocity = Vector2.down * SpeedManager.instance.ObstacleSpeed;
+
 		if (GameSettings.instance.IsGameOver)
 		{
 			m_rigidBody2D.velocity = Vector2.zero;
 		}
+	}
 
-		if (transform.position.y < m_destroyMarker.transform.position.y)
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.GetComponent<Collider2D>() != null)
 		{
-			GameSettings.instance.healthPoint -= 1;
-			Debug.Log("healthPoint = " + GameSettings.instance.healthPoint);
+			if (collision.name == Ship.instance.name)
+			{
+				GameSettings.instance.healthPoint -= 1;
+				Debug.Log("healthPoint = " + GameSettings.instance.healthPoint);
+			}
+			else if (collision.name == Shield.instance.name)
+			{
+
+			}
 			Destroy(this.gameObject);
 			ObstacleManager.instance.spawners[(int)Lane].RemoveObstacle(this.Type, this);
 		}

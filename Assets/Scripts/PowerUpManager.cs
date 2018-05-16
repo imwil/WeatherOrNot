@@ -9,27 +9,33 @@ public class PowerUpManager : MonoBehaviour
 	public enum Type
 	{
 		SHIELD,
-		DOUBLE_SCORE,
-		SLOW,
+		SCORE_MULTIPLY,
+		TIME_SLOW,
 		COUNT
 	}
 
 	public float duration;
-
-	private float[] remainingTime;
-	public bool this[int i]
-	{
-		get
-		{
-			return remainingTime[i] > 0f;
-		}
-	}
+	private PowerUp[] m_powerUps;
 
 	private void Awake()
 	{
 		instance = this;
-		remainingTime = new float[(int)Type.COUNT];
-		Activate(Type.DOUBLE_SCORE);
+		m_powerUps = new PowerUp[(int)Type.COUNT];
+		for (int i = 0; i < m_powerUps.Length; i++)
+		{
+			switch ((Type)i)
+			{
+				case Type.SHIELD:
+					m_powerUps[i] = new ShieldPowerUp();
+					break;
+				case Type.SCORE_MULTIPLY:
+					m_powerUps[i] = new ScoreMultiplierPowerUp();
+					break;
+				case Type.TIME_SLOW:
+					m_powerUps[i] = new TimeSlowPowerUp();
+					break;
+			}
+		}
 	}
 
 	// Use this for initialization
@@ -41,20 +47,44 @@ public class PowerUpManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		for (int i = 0; i < remainingTime.Length; i++)
+		Type type = 0;
+		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
-			if (remainingTime[i] <= 0f)
-			{
-				remainingTime[i] = 0f;
-			}
+			type = Type.SHIELD;
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			type = Type.SCORE_MULTIPLY;
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			type = Type.TIME_SLOW;
+		}
+		if (!m_powerUps[(int)type].IsActive)
+		{
+			Activate(type);
+		}
+		else
+		{
+			Deactivate(type);
+		}
+
+		for (int i = 0; i < m_powerUps.Length; i++)
+		{
+			m_powerUps[i].Update();
 		}
 	}
 
-	public void Activate(Type type)
+	public void Activate(Type type, bool isActive = true)
 	{
 		if (type >= Type.SHIELD && type < Type.COUNT)
 		{
-			remainingTime[(int)type] = duration;
+			m_powerUps[(int)type].Activate(isActive);
 		}
+	}
+
+	public void Deactivate(Type type)
+	{
+		Activate(type, false);
 	}
 }
