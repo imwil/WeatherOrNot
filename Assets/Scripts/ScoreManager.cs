@@ -34,6 +34,8 @@ public class ScoreManager : MonoBehaviour
 	{
 		instance = this;
 		tickInterval = 1f / tickPerSecond;
+		lastTickTime = 0f;
+		ApplyMultiplier(false);
 	}
 	
 	// Update is called once per frame

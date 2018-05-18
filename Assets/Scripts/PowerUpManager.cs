@@ -48,25 +48,32 @@ public class PowerUpManager : MonoBehaviour
 	void Update ()
 	{
 		Type type = 0;
+		bool isKeyPressed = false;
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			type = Type.SHIELD;
+			isKeyPressed = true;
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
 			type = Type.SCORE_MULTIPLY;
+			isKeyPressed = true;
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
 			type = Type.TIME_SLOW;
+			isKeyPressed = true;
 		}
-		if (!m_powerUps[(int)type].IsActive)
+		if (isKeyPressed)
 		{
-			Activate(type);
-		}
-		else
-		{
-			Deactivate(type);
+			if (!m_powerUps[(int)type].IsActive)
+			{
+				Activate(type);
+			}
+			else
+			{
+				Deactivate(type);
+			}
 		}
 
 		for (int i = 0; i < m_powerUps.Length; i++)

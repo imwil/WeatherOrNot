@@ -20,6 +20,7 @@ public class GameSettings : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
+		IsGameOver = false;
 	} 
 
 	// Use this for initialization

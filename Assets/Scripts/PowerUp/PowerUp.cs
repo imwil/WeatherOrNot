@@ -16,6 +16,11 @@ public class PowerUp
 
 	private float remainingTime;
 
+	private void Awake()
+	{
+		Activate(false);
+	}
+
 	// Use this for initialization
 	virtual public void Start ()
 	{

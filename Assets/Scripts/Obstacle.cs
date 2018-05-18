@@ -12,6 +12,7 @@ public class Obstacle : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		Lane = GameSettings.Lane.MIDDLE;
 		m_rigidBody2D = GetComponent<Rigidbody2D>();
 	}
 	
