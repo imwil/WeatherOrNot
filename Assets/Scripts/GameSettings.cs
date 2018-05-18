@@ -10,7 +10,7 @@ public class GameSettings : MonoBehaviour
 	public int healthPoint;
 	public Crew crew;
 	public SpriteRenderer[] rects;
-	
+
 	public enum Lane
 	{
 		LEFT, MIDDLE, RIGHT, COUNT
@@ -21,53 +21,39 @@ public class GameSettings : MonoBehaviour
 	{
 		instance = this;
 		IsGameOver = false;
-	} 
+	}
 
 	// Use this for initialization
 	void Start ()
 	{
-		Debug.Log(rects[0].transform.position + " " + rects[0].bounds.size);
-		Debug.Log("(" + rects[0].size.x * rects[0].transform.localScale.x + ", " + rects[0].size.y * rects[0].transform.localScale.y + ")");
-		var tapLeftRecognizer = new TKTapRecognizer();
-		tapLeftRecognizer.boundaryFrame = new TKRect(rects[0].transform.position.x, rects[0].transform.position.y, rects[0].bounds.size.x, rects[0].bounds.size.y);
-		tapLeftRecognizer.gestureRecognizedEvent += (r) =>
-		{
-			Debug.Log("tap recognizer fired: " + r);
-			if (crew.Lane > GameSettings.Lane.LEFT)
-			{
-				crew.Lane -= 1;
-			}
-		};
-		TouchKit.addGestureRecognizer(tapLeftRecognizer);
+		//var moveLeftRecognizer = new TKMultiDirectionalSwipeRecognizer();
+		//moveLeftRecognizer.addSwipeDirection(TKSwipeDirection.Left);
+		//moveLeftRecognizer.gestureRecognizedEvent += (r) =>
+		//{
+		//	Debug.Log("Move Left gesture recognizer fired: " + r);
+		//	if (crew.Lane > GameSettings.Lane.LEFT)
+		//	{
+		//		crew.Lane -= 1;
+		//	}
+		//};
+		//TouchKit.addGestureRecognizer(moveLeftRecognizer);
 
-		var moveLeftRecognizer = new TKMultiDirectionalSwipeRecognizer();
-		moveLeftRecognizer.addSwipeDirection(TKSwipeDirection.Left);
-		moveLeftRecognizer.gestureRecognizedEvent += (r) =>
-		{
-			Debug.Log("Move Left gesture recognizer fired: " + r);
-			if (crew.Lane > GameSettings.Lane.LEFT)
-			{
-				crew.Lane -= 1;
-			}
-		};
-		TouchKit.addGestureRecognizer(moveLeftRecognizer);
-
-		var moveRightRecognizer = new TKMultiDirectionalSwipeRecognizer();
-		moveRightRecognizer.addSwipeDirection(TKSwipeDirection.Right);
-		moveRightRecognizer.gestureRecognizedEvent += (r) =>
-		{
-			Debug.Log("Move Right gesture recognizer fired: " + r);
-			if (crew.Lane < GameSettings.Lane.RIGHT)
-			{
-				crew.Lane += 1;
-			}
-		};
-		TouchKit.addGestureRecognizer(moveRightRecognizer);
+		//var moveRightRecognizer = new TKMultiDirectionalSwipeRecognizer();
+		//moveRightRecognizer.addSwipeDirection(TKSwipeDirection.Right);
+		//moveRightRecognizer.gestureRecognizedEvent += (r) =>
+		//{
+		//	Debug.Log("Move Right gesture recognizer fired: " + r);
+		//	if (crew.Lane < GameSettings.Lane.RIGHT)
+		//	{
+		//		crew.Lane += 1;
+		//	}
+		//};
+		//TouchKit.addGestureRecognizer(moveRightRecognizer);
 
 		var lightningRecognizer = new TKMultiDirectionalSwipeRecognizer();
-		lightningRecognizer.addSwipeDirection(TKSwipeDirection.DownLeft);
-		lightningRecognizer.addSwipeDirection(TKSwipeDirection.Right);
-		lightningRecognizer.addSwipeDirection(TKSwipeDirection.DownLeft);
+		lightningRecognizer.AddSwipe(120);
+		lightningRecognizer.AddSwipe(350);
+		lightningRecognizer.AddSwipe(120);
 		lightningRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Lightning gesture recognizer fired: " + r);
@@ -76,7 +62,7 @@ public class GameSettings : MonoBehaviour
 		TouchKit.addGestureRecognizer(lightningRecognizer);
 
 		var rainRecognizer = new TKMultiDirectionalSwipeRecognizer();
-		rainRecognizer.addSwipeDirection(TKSwipeDirection.DownLeft);
+		rainRecognizer.AddSwipe(135);
 		rainRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Rain gesture recognizer fired: " + r);
@@ -84,29 +70,29 @@ public class GameSettings : MonoBehaviour
 		};
 		TouchKit.addGestureRecognizer(rainRecognizer);
 
-		var earthQuakeRecognizer = new TKMultiDirectionalSwipeRecognizer();
-		earthQuakeRecognizer.addSwipeDirection(TKSwipeDirection.UpRight);
-		earthQuakeRecognizer.addSwipeDirection(TKSwipeDirection.DownRight);
-		earthQuakeRecognizer.addSwipeDirection(TKSwipeDirection.UpRight);
-		earthQuakeRecognizer.addSwipeDirection(TKSwipeDirection.DownRight);
-		earthQuakeRecognizer.gestureRecognizedEvent += (r) =>
-		{
-			Debug.Log("Earthquake gesture recognizer fired: " + r);
-			ObstacleManager.instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.EARTHQUAKE);
-		};
-		TouchKit.addGestureRecognizer(earthQuakeRecognizer);
-		
-		var stormRecognizer = new TKDiscreteCurveRecognizer();
-		stormRecognizer.gestureRecognizedEvent += (r) =>
-		{
-			Debug.Log("Storm gesture recognizer fired: " + r);
-			ObstacleManager.instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.STORM);
-		};
-		TouchKit.addGestureRecognizer(stormRecognizer);
+		//var earthQuakeRecognizer = new TKMultiDirectionalSwipeRecognizer();
+		//earthQuakeRecognizer.addSwipeDirection(TKSwipeDirection.UpRight);
+		//earthQuakeRecognizer.addSwipeDirection(TKSwipeDirection.DownRight);
+		//earthQuakeRecognizer.addSwipeDirection(TKSwipeDirection.UpRight);
+		//earthQuakeRecognizer.addSwipeDirection(TKSwipeDirection.DownRight);
+		//earthQuakeRecognizer.gestureRecognizedEvent += (r) =>
+		//{
+		//	Debug.Log("Earthquake gesture recognizer fired: " + r);
+		//	ObstacleManager.instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.EARTHQUAKE);
+		//};
+		//TouchKit.addGestureRecognizer(earthQuakeRecognizer);
+
+		//var stormRecognizer = new TKDiscreteCurveRecognizer();
+		//stormRecognizer.gestureRecognizedEvent += (r) =>
+		//{
+		//	Debug.Log("Storm gesture recognizer fired: " + r);
+		//	ObstacleManager.instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.STORM);
+		//};
+		//TouchKit.addGestureRecognizer(stormRecognizer);
 
 		var volcanoRecognizer = new TKMultiDirectionalSwipeRecognizer();
-		volcanoRecognizer.addSwipeDirection(TKSwipeDirection.UpRight);
-		volcanoRecognizer.addSwipeDirection(TKSwipeDirection.DownRight);
+		volcanoRecognizer.AddSwipe(315);
+		volcanoRecognizer.AddSwipe(45);
 		volcanoRecognizer.gestureRecognizedEvent += (r) =>
 		{
 			Debug.Log("Volcano gesture recognizer fired: " + r);
@@ -114,7 +100,7 @@ public class GameSettings : MonoBehaviour
 		};
 		TouchKit.addGestureRecognizer(volcanoRecognizer);
 	}
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
