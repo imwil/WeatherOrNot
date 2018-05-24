@@ -79,9 +79,13 @@ public class ObstacleSpawner : MonoBehaviour
 
 	public void DestroyObstacle(ObstacleType type)
 	{
+		Debug.LogFormat("{0}, {1}, {2}, {3}, {4}", m_obstacles[(int)ObstacleType.LIGHTNING].Count, m_obstacles[(int)ObstacleType.RAIN].Count, m_obstacles[(int)ObstacleType.EARTHQUAKE].Count, m_obstacles[(int)ObstacleType.STORM].Count, m_obstacles[(int)ObstacleType.VOLCANO].Count);
 		if (m_obstacles[(int)type].Count > 0)
 		{
-			Destroy(m_obstacles[(int)type].FirstOrDefault().gameObject);
+			if (m_obstacles[(int)type].FirstOrDefault() != null)
+			{
+				Destroy(m_obstacles[(int)type].FirstOrDefault().gameObject);
+			}
 			RemoveObstacle(type, m_obstacles[(int)type].FirstOrDefault());
 		}
 	}

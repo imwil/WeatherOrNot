@@ -17,6 +17,9 @@ public class TKDiscreteCurveRecognizer : TKAbstractGestureRecognizer
 	public int minimumNumberOfTouches = 1;
 	public int maximumNumberOfTouches = 2;
 
+	private float m_successCurveAngle;
+	private float m_successLineAngle;
+
 	//should be read only
 	public float deltaRotation = 0f; //rotation since last reported
 
@@ -26,6 +29,11 @@ public class TKDiscreteCurveRecognizer : TKAbstractGestureRecognizer
 
 	private List<Vector2> _points = new List<Vector2>();
 
+	public void SetAngles(float _curveAngle, float _lineAngle)
+	{
+		m_successCurveAngle = _curveAngle;
+		m_successLineAngle = _lineAngle;
+	}
 
 	internal override void fireRecognizedEvent()
 	{
@@ -147,33 +155,12 @@ public class TKDiscreteCurveRecognizer : TKAbstractGestureRecognizer
 		{
 			float idealDistance = Vector2.Distance(this._points.FirstOrDefault(), this._points.LastOrDefault());
 			float idealDistanceCM = idealDistance / TouchKit.instance.ScreenPixelsPerCm;
-			Vector2 dirVec = (this._points.LastOrDefault() - this._points.FirstOrDefault()).normalized;
-			float angle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
-			if (angle < 0)
-				angle = 360 + angle;
-			angle = 360 - angle;
-			TKSwipeDirection completedSwipeDirection;
-			if (angle >= 292.5f && angle <= 337.5f)
-				completedSwipeDirection = TKSwipeDirection.UpRight;
-			else if (angle >= 247.5f && angle <= 292.5f)
-				completedSwipeDirection = TKSwipeDirection.Up;
-			else if (angle >= 202.5f && angle <= 247.5f)
-				completedSwipeDirection = TKSwipeDirection.UpLeft;
-			else if (angle >= 157.5f && angle <= 202.5f)
-				completedSwipeDirection = TKSwipeDirection.Left;
-			else if (angle >= 112.5f && angle <= 157.5f)
-				completedSwipeDirection = TKSwipeDirection.DownLeft;
-			else if (angle >= 67.5f && angle <= 112.5f)
-				completedSwipeDirection = TKSwipeDirection.Down;
-			else if (angle >= 22.5f && angle <= 67.5f)
-				completedSwipeDirection = TKSwipeDirection.DownRight;
-			else // angle >= 337.5f || angle <= 22.5f
-				completedSwipeDirection = TKSwipeDirection.Right;
+			float lineAngle = getLineAngle(this._points.LastOrDefault(), this._points.FirstOrDefault());
 
-			Debug.LogFormat("deltaRotation = {0}, idealDistanceCM = {1}, completedSwipeDirection = {2}", deltaRotation, idealDistanceCM, completedSwipeDirection);
-			if (Mathf.Abs(deltaRotation) >= 500 && Mathf.Abs(deltaRotation) <= 580
+			Debug.LogFormat("deltaRotation = {0}, idealDistanceCM = {1}, start end points angle = {2}", deltaRotation, idealDistanceCM, lineAngle);
+			if (deltaRotation > m_successCurveAngle - 40f && deltaRotation < m_successCurveAngle + 40f
 				//&& idealDistanceCM >= 1 && idealDistanceCM <= 2
-				&& completedSwipeDirection == TKSwipeDirection.Up)
+				&& lineAngle > m_successLineAngle - 30f && lineAngle < m_successLineAngle + 30f)
 			{
 				state = TKGestureRecognizerState.Recognized;
 			}

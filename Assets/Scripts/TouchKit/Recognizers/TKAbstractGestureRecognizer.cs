@@ -202,6 +202,17 @@ public abstract class TKAbstractGestureRecognizer : IComparable<TKAbstractGestur
 		return !boundaryFrame.HasValue || boundaryFrame.Value.contains( touch.position );
 	}
 
+	protected float getLineAngle(Vector2 p1, Vector2 p2)
+	{
+		Vector2 dirVec = (p2 - p1).normalized;
+		float swipeAngle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
+		if (swipeAngle < 0)
+			swipeAngle = 360 + swipeAngle;
+		swipeAngle = 360 - swipeAngle;
+
+		return swipeAngle;
+	}
+
 
 	/// <summary>
 	/// returns the location of the touches. If there are multiple touches this will return the centroid of the location.

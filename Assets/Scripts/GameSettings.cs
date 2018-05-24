@@ -9,7 +9,6 @@ public class GameSettings : MonoBehaviour
 
 	public int healthPoint;
 	public Crew crew;
-	public SpriteRenderer[] rects;
 
 	public enum Lane
 	{
@@ -17,38 +16,47 @@ public class GameSettings : MonoBehaviour
 	};
 	public bool IsGameOver { get; private set; }
 
+	private float tapZoneWidth;
+	private float tapZoneHeight;
+
 	private void Awake()
 	{
 		instance = this;
 		IsGameOver = false;
+
+		tapZoneWidth = 106.65f;
+		tapZoneHeight = 180f;
 	}
 
 	// Use this for initialization
 	void Start ()
 	{
-		//var moveLeftRecognizer = new TKMultiDirectionalSwipeRecognizer();
-		//moveLeftRecognizer.addSwipeDirection(TKSwipeDirection.Left);
-		//moveLeftRecognizer.gestureRecognizedEvent += (r) =>
-		//{
-		//	Debug.Log("Move Left gesture recognizer fired: " + r);
-		//	if (crew.Lane > GameSettings.Lane.LEFT)
-		//	{
-		//		crew.Lane -= 1;
-		//	}
-		//};
-		//TouchKit.addGestureRecognizer(moveLeftRecognizer);
+		var leftTapRecognizer = new TKTapRecognizer();
+		leftTapRecognizer.boundaryFrame = new TKRect(0f, 0f, tapZoneWidth, tapZoneHeight);
+		leftTapRecognizer.gestureRecognizedEvent += (r) =>
+		{
+			Debug.Log("Left Zone Tap recognizer fired: " + r);
+			crew.Lane = GameSettings.Lane.LEFT;
+		};
+		TouchKit.addGestureRecognizer(leftTapRecognizer);
 
-		//var moveRightRecognizer = new TKMultiDirectionalSwipeRecognizer();
-		//moveRightRecognizer.addSwipeDirection(TKSwipeDirection.Right);
-		//moveRightRecognizer.gestureRecognizedEvent += (r) =>
-		//{
-		//	Debug.Log("Move Right gesture recognizer fired: " + r);
-		//	if (crew.Lane < GameSettings.Lane.RIGHT)
-		//	{
-		//		crew.Lane += 1;
-		//	}
-		//};
-		//TouchKit.addGestureRecognizer(moveRightRecognizer);
+		var middleTapRecognizer = new TKTapRecognizer();
+		middleTapRecognizer.boundaryFrame = new TKRect(tapZoneWidth, 0f, tapZoneWidth, tapZoneHeight);
+		middleTapRecognizer.gestureRecognizedEvent += (r) =>
+		{
+			Debug.Log("Middle Zone Tap recognizer fired: " + r);
+			crew.Lane = GameSettings.Lane.MIDDLE;
+		};
+		TouchKit.addGestureRecognizer(middleTapRecognizer);
+
+		var rightTapRecognizer = new TKTapRecognizer();
+		rightTapRecognizer.boundaryFrame = new TKRect(2 * tapZoneWidth, 0f, tapZoneWidth, tapZoneHeight);
+		rightTapRecognizer.gestureRecognizedEvent += (r) =>
+		{
+			Debug.Log("Right Zone Tap recognizer fired: " + r);
+			crew.Lane = GameSettings.Lane.RIGHT;
+		};
+		TouchKit.addGestureRecognizer(rightTapRecognizer);
 
 		var lightningRecognizer = new TKMultiDirectionalSwipeRecognizer();
 		lightningRecognizer.AddSwipe(120);
@@ -82,13 +90,14 @@ public class GameSettings : MonoBehaviour
 		//};
 		//TouchKit.addGestureRecognizer(earthQuakeRecognizer);
 
-		//var stormRecognizer = new TKDiscreteCurveRecognizer();
-		//stormRecognizer.gestureRecognizedEvent += (r) =>
-		//{
-		//	Debug.Log("Storm gesture recognizer fired: " + r);
-		//	ObstacleManager.instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.STORM);
-		//};
-		//TouchKit.addGestureRecognizer(stormRecognizer);
+		var stormRecognizer = new TKDiscreteCurveRecognizer();
+		stormRecognizer.SetAngles(-540f, 270f);
+		stormRecognizer.gestureRecognizedEvent += (r) =>
+		{
+			Debug.Log("Storm gesture recognizer fired: " + r);
+			ObstacleManager.instance.spawners[(int)crew.Lane].DestroyObstacle(ObstacleSpawner.ObstacleType.STORM);
+		};
+		TouchKit.addGestureRecognizer(stormRecognizer);
 
 		var volcanoRecognizer = new TKMultiDirectionalSwipeRecognizer();
 		volcanoRecognizer.AddSwipe(315);

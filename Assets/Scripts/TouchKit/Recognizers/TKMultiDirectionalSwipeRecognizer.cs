@@ -159,18 +159,21 @@ public class TKMultiDirectionalSwipeRecognizer : TKAbstractGestureRecognizer
 		// if the real distance is 10% greater than the ideal distance, then fail
 		// this weeds out really irregular "lines" and curves from being considered swipes
 		if (realDistance > idealDistance * 1.3f)
+		{
+			state = TKGestureRecognizerState.FailedOrEnded;
 			return false;
+		}
 
 		// the speed in cm/s of the swipe
 		swipeVelocity = idealDistanceCM / (Time.time - this._startTime);
 
 		// turn the slope of the ideal swipe line into an angle in degrees
-		float longSwipeAngle = getSwipeAngle(startPoint, endPoint);
+		float longSwipeAngle = getLineAngle(startPoint, endPoint);
 
 		// depending on the angle of the line, give a logical swipe direction
 		completedSwipeDirection = getSwipeDirection(longSwipeAngle);
 
-		float shortSwipeAngle = getSwipeAngle(this._points[this._points.Count - 3], endPoint);
+		float shortSwipeAngle = getLineAngle(this._points[this._points.Count - 3], endPoint);
 
 		// depending on the angle of the line, give a logical swipe direction
 		TKSwipeDirection swipeDirection = getSwipeDirection(shortSwipeAngle);
@@ -284,17 +287,6 @@ public class TKMultiDirectionalSwipeRecognizer : TKAbstractGestureRecognizer
 	{
 		return string.Format("{0}, swipe direction: {1}, swipe velocity: {2}, start point: {3}, end point: {4}",
 			base.ToString(), completedSwipeDirection, swipeVelocity, startPoint, endPoint);
-	}
-
-	private float getSwipeAngle(Vector2 p1, Vector2 p2)
-	{
-		Vector2 dirVec = (p2 - p1).normalized;
-		float swipeAngle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
-		if (swipeAngle < 0)
-			swipeAngle = 360 + swipeAngle;
-		swipeAngle = 360 - swipeAngle;
-
-		return swipeAngle;
 	}
 
 	private TKSwipeDirection getSwipeDirection(float angle)
