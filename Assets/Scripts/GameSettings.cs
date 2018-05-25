@@ -24,8 +24,8 @@ public class GameSettings : MonoBehaviour
 		instance = this;
 		IsGameOver = false;
 
-		tapZoneWidth = 106.65f;
-		tapZoneHeight = 180f;
+		tapZoneWidth = 106.65f;	// hardcode this, do not change the value if there is no problem with moving crew when tapping
+		tapZoneHeight = 180f;   // hardcode this, do not change the value if there is no problem with moving crew when tapping
 	}
 
 	// Use this for initialization

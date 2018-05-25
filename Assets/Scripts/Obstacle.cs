@@ -31,12 +31,12 @@ public class Obstacle : MonoBehaviour
 	{
 		if (collision.GetComponent<Collider2D>() != null)
 		{
-			if (collision.name == Ship.instance.name)
+			if (collision.CompareTag("Ship"))
 			{
 				GameSettings.instance.healthPoint -= 1;
 				Debug.Log("healthPoint = " + GameSettings.instance.healthPoint);
 			}
-			else if (collision.name == Shield.instance.name)
+			else if (collision.CompareTag("Shield"))
 			{
 
 			}
