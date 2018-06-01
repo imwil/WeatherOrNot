@@ -17,7 +17,7 @@ public class ScrollingObject : MonoBehaviour
 	{
 		m_rigidBody2D.velocity = Vector2.down * SpeedManager.instance.BackgroundSpeed;
 
-		if (GameSettings.instance.IsGameOver)
+		if (GameSettings.instance.IsGameOver || GameSettings.instance.IsGamePause)
 		{
 			m_rigidBody2D.velocity = Vector2.zero;
 		}

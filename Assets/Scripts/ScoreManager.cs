@@ -42,7 +42,7 @@ public class ScoreManager : MonoBehaviour
 	void Update ()
 	{
 		lastTickTime += Time.deltaTime;
-		if (lastTickTime >= tickInterval)
+		if (!(GameSettings.instance.IsGameOver || GameSettings.instance.IsGamePause) && lastTickTime >= tickInterval)
 		{
 			Score += ScorePerTick;
 			lastTickTime -= tickInterval;

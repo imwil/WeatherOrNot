@@ -12,7 +12,7 @@ public class TKDiscreteCurveRecognizer : TKAbstractGestureRecognizer
 
 	public float reportRotationStep = 20f; //how much rotation (degrees) is needed for the recognized event to fire
 	public float squareDistance = 10f; //squared distance of touhes being evaluated
-	public float maxSharpnes = 50f; //maximum angle (degrees) a touch is allowed to change direction of movement
+	public float maxSharpnes = 80f; //maximum angle (degrees) a touch is allowed to change direction of movement
 
 	public int minimumNumberOfTouches = 1;
 	public int maximumNumberOfTouches = 2;
@@ -158,9 +158,9 @@ public class TKDiscreteCurveRecognizer : TKAbstractGestureRecognizer
 			float lineAngle = getLineAngle(this._points.LastOrDefault(), this._points.FirstOrDefault());
 
 			Debug.LogFormat("deltaRotation = {0}, idealDistanceCM = {1}, start end points angle = {2}", deltaRotation, idealDistanceCM, lineAngle);
-			if (deltaRotation > m_successCurveAngle - 40f && deltaRotation < m_successCurveAngle + 40f
+			if (deltaRotation > m_successCurveAngle - 50f && deltaRotation < m_successCurveAngle + 50f
 				//&& idealDistanceCM >= 1 && idealDistanceCM <= 2
-				&& lineAngle > m_successLineAngle - 30f && lineAngle < m_successLineAngle + 30f)
+				&& lineAngle > m_successLineAngle - 40f && lineAngle < m_successLineAngle + 40f)
 			{
 				state = TKGestureRecognizerState.Recognized;
 			}

@@ -15,6 +15,7 @@ public class GameSettings : MonoBehaviour
 		LEFT, MIDDLE, RIGHT, COUNT
 	};
 	public bool IsGameOver { get; private set; }
+	public bool IsGamePause { get; set; }
 
 	private float tapZoneWidth;
 	private float tapZoneHeight;
@@ -23,6 +24,7 @@ public class GameSettings : MonoBehaviour
 	{
 		instance = this;
 		IsGameOver = false;
+		IsGamePause = false;
 
 		tapZoneWidth = 106.65f;	// hardcode this, do not change the value if there is no problem with moving crew when tapping
 		tapZoneHeight = 180f;   // hardcode this, do not change the value if there is no problem with moving crew when tapping

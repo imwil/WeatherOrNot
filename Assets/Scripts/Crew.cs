@@ -38,6 +38,9 @@ public class Crew : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+		if (!(GameSettings.instance.IsGameOver || GameSettings.instance.IsGamePause))
+		{
+			transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+		}
 	}
 }
