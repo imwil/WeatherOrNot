@@ -181,8 +181,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 936104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.54, z: 0}
-  m_LocalScale: {x: 0.68, y: 0.59, z: 1}
+  m_LocalPosition: {x: 0, y: -6.8, z: 0}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 1}
   m_Children:
   - {fileID: 211989746}
   m_Father: {fileID: 0}
@@ -204,7 +204,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.8, y: 7.38}
+    oldSize: {x: 10.8, y: 19.2}
     newSize: {x: 3.09, y: 1.74}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -212,9 +212,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 3.3}
-      - {x: -5.5, y: -2.5}
-      - {x: 5.5, y: -2.5}
+    - - {x: 0, y: 8}
+      - {x: -7, y: 3}
+      - {x: 7, y: 3}
 --- !u!1 &211989745
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,13 +251,13 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 211989745}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -5.5}
+  m_Offset: {x: 0, y: -0.5}
   serializedVersion: 2
   m_Radius: 10
 --- !u!114 &211989748
@@ -294,7 +294,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 535302543}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0.85, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children:
   - {fileID: 1601139169}
