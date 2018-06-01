@@ -7,11 +7,14 @@ public class Shield : MonoBehaviour
 	public static Shield instance = null;
 
 	private Collider2D trigger;
+	private SpriteRenderer sprite;
 
 	private void Awake()
 	{
 		instance = this;
+		//this.gameObject.SetActive(false);
 		trigger = GetComponent<Collider2D>();
+		sprite = GetComponent<SpriteRenderer>();
 	}
 
 	// Use this for initialization
@@ -28,6 +31,8 @@ public class Shield : MonoBehaviour
 
 	public void Enable(bool isEnable)
 	{
+		//this.gameObject.SetActive(isEnable);
 		trigger.enabled = isEnable;
+		sprite.enabled = isEnable;
 	}
 }
