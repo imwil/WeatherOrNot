@@ -17,7 +17,7 @@ public class Crew : MonoBehaviour
 		set
 		{
 			m_lane = value;
-			target = markers[(int)value].position;
+			target = new Vector3(markers[(int)value].position.x, transform.position.y, transform.position.z);
 		}
 	}
 
