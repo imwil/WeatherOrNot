@@ -10,6 +10,7 @@ public class HUDManager : MonoBehaviour
 	[SerializeField] private Button shieldButton;
 	[SerializeField] private Button doubleScoreButton;
 	[SerializeField] private Button slowTimeButton;
+	[SerializeField] private Button startGameTestButton;
 
 	// Use this for initialization
 	void Start ()
@@ -22,6 +23,10 @@ public class HUDManager : MonoBehaviour
 			doubleScoreButton.onClick.AddListener(() => { PowerUpManager.instance.Activate(PowerUpManager.Type.SCORE_MULTIPLY); });
 		if (slowTimeButton)
 			slowTimeButton.onClick.AddListener(() => { PowerUpManager.instance.Activate(PowerUpManager.Type.TIME_SLOW); });
+		if (startGameTestButton)
+			startGameTestButton.onClick.AddListener(() => {
+				SceneManager.LoadScene("InGame");
+			});
 	}
 	
 	// Update is called once per frame
