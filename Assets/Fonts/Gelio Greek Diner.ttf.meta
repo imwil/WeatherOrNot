@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 8d9431e3b7e004c42bc0361e16133b70
+timeCreated: 1528449483
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Gelio Greek Diner
+  fontNames:
+  - Gelio Greek Diner
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

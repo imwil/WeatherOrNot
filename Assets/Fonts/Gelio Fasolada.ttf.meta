@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 5abae2ae7f840664d8e1fe7670e7ffbc
+timeCreated: 1528449483
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Gelio Fasolada
+  fontNames:
+  - Gelio Fasolada
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
