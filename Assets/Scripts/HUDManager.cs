@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
@@ -13,10 +14,14 @@ public class HUDManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		pauseButton.onClick.AddListener(() => { GameSettings.instance.IsGamePause = !GameSettings.instance.IsGamePause; });
-		shieldButton.onClick.AddListener(() => { PowerUpManager.instance.Activate(PowerUpManager.Type.SHIELD); });
-		doubleScoreButton.onClick.AddListener(() => { PowerUpManager.instance.Activate(PowerUpManager.Type.SCORE_MULTIPLY); });
-		slowTimeButton.onClick.AddListener(() => { PowerUpManager.instance.Activate(PowerUpManager.Type.TIME_SLOW); });
+		if (pauseButton)
+			pauseButton.onClick.AddListener(() => { GameSettings.instance.IsGamePause = !GameSettings.instance.IsGamePause; });
+		if (shieldButton)
+			shieldButton.onClick.AddListener(() => { PowerUpManager.instance.Activate(PowerUpManager.Type.SHIELD); });
+		if (doubleScoreButton)
+			doubleScoreButton.onClick.AddListener(() => { PowerUpManager.instance.Activate(PowerUpManager.Type.SCORE_MULTIPLY); });
+		if (slowTimeButton)
+			slowTimeButton.onClick.AddListener(() => { PowerUpManager.instance.Activate(PowerUpManager.Type.TIME_SLOW); });
 	}
 	
 	// Update is called once per frame
