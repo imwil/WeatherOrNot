@@ -17,7 +17,7 @@ public class LoopingBackground : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (transform.position.y < -m_bgVerticalLength)
+		if (transform.localPosition.y < -m_bgVerticalLength)
 		{
 			Reposition();
 		}
@@ -26,6 +26,6 @@ public class LoopingBackground : MonoBehaviour
 	private void Reposition()
 	{
 		Vector2 bgOffset = new Vector2(0f, m_bgVerticalLength * 2f);
-		transform.position = (Vector2)transform.position + bgOffset;
+		transform.localPosition = (Vector2)transform.localPosition + bgOffset;
 	}
 }
