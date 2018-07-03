@@ -17,11 +17,11 @@ public class Crew : MonoBehaviour
 		set
 		{
 			m_lane = value;
-			target = new Vector3(markers[(int)value].position.x, transform.position.y, transform.position.z);
+			target = new Vector2(markers[(int)value].position.x, transform.position.y);
 		}
 	}
 
-	private Vector3 target;
+	private Vector2 target;
 
 	private void Awake()
 	{
@@ -40,7 +40,11 @@ public class Crew : MonoBehaviour
 	{
 		if (GameSettings.instance && GameSettings.instance.State == GameSettings.GameState.IN_GAME)
 		{
-			transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+			if (target.y != transform.position.y)
+			{
+				target.y = transform.position.y;
+			}
+			transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 		}
 	}
 }
