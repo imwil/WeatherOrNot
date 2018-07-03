@@ -9,13 +9,18 @@ public class Obstacle : MonoBehaviour
 
 	private Rigidbody2D m_rigidBody2D;
 
-	// Use this for initialization
-	void Start ()
+	private void Awake()
 	{
 		Lane = GameSettings.Lane.MIDDLE;
 		m_rigidBody2D = GetComponent<Rigidbody2D>();
 	}
-	
+
+	// Use this for initialization
+	void Start()
+	{
+		
+	}
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -31,17 +36,18 @@ public class Obstacle : MonoBehaviour
 	{
 		if (collision.GetComponent<Collider2D>() != null)
 		{
+			bool isKill = false;
 			if (collision.CompareTag("Ship"))
 			{
 				GameSettings.instance.healthPoint -= 1;
 				Debug.Log("healthPoint = " + GameSettings.instance.healthPoint);
+				isKill = false;
 			}
 			else if (collision.CompareTag("Shield"))
 			{
-
+				isKill = true;
 			}
-			Destroy(this.gameObject);
-			ObstacleManager.instance.spawners[(int)Lane].RemoveObstacle(this.Type, this);
+			ObstacleManager.instance.spawners[(int)Lane].DestroyObstacle(this, isKill);
 		}
 	}
 }

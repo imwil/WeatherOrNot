@@ -14,7 +14,8 @@ public class ObstacleSpawner : MonoBehaviour
 		RAIN,
 		EARTHQUAKE,
 		STORM,
-		VOLCANO
+		VOLCANO,
+		COUNT
 	};
 
 	public Obstacle[] obstaclePrefabs;
@@ -77,21 +78,40 @@ public class ObstacleSpawner : MonoBehaviour
 		
 	}
 
-	public void DestroyObstacle(ObstacleType type)
+	public void DestroyObstacle(Obstacle obstacle, bool isKill = true)
 	{
 		Debug.LogFormat("{0}, {1}, {2}, {3}, {4}", m_obstacles[(int)ObstacleType.LIGHTNING].Count, m_obstacles[(int)ObstacleType.RAIN].Count, m_obstacles[(int)ObstacleType.EARTHQUAKE].Count, m_obstacles[(int)ObstacleType.STORM].Count, m_obstacles[(int)ObstacleType.VOLCANO].Count);
-		if (m_obstacles[(int)type].Count > 0)
+		if (obstacle != null && m_obstacles[(int)obstacle.Type].Count > 0)
 		{
-			if (m_obstacles[(int)type].FirstOrDefault() != null)
+			Destroy(obstacle.gameObject);
+			if (isKill && GameSettings.instance.KilledObstaclesCount < GameSettings.instance.maxKilledObstacles)
 			{
-				Destroy(m_obstacles[(int)type].FirstOrDefault().gameObject);
+				GameSettings.instance.KilledObstaclesCount++;
 			}
-			RemoveObstacle(type, m_obstacles[(int)type].FirstOrDefault());
+			m_obstacles[(int)obstacle.Type].Remove(obstacle);
 		}
 	}
 
-	public void RemoveObstacle(ObstacleType type, Obstacle obstacle)
+	public void DestroyObstacle(ObstacleType type)
 	{
-		m_obstacles[(int)type].Remove(obstacle);
+		if (m_obstacles[(int)type].Count > 0)
+		{
+			DestroyObstacle(m_obstacles[(int)type].FirstOrDefault());
+		}
+	}
+
+	public void DestroyAll()
+	{
+		for (int i = 0; i < m_obstacles.Length; i++)
+		{
+			m_obstacles[i].ForEach((Obstacle obstacle) => {
+				Destroy(obstacle.gameObject);
+				if (GameSettings.instance.KilledObstaclesCount < GameSettings.instance.maxKilledObstacles)
+				{
+					GameSettings.instance.KilledObstaclesCount++;
+				}
+			});
+			m_obstacles[i].Clear();
+		}
 	}
 }

@@ -9,6 +9,7 @@ public class GameSettings : MonoBehaviour
 
 	public int healthPoint;
 	public Crew crew;
+	public int maxKilledObstacles;
 
 	public enum Lane
 	{
@@ -16,6 +17,7 @@ public class GameSettings : MonoBehaviour
 	};
 	public bool IsGameOver { get; private set; }
 	public bool IsGamePause { get; set; }
+	public int KilledObstaclesCount { get; set; }
 
 	private float tapZoneWidth;
 	private float tapZoneHeight;
@@ -25,6 +27,7 @@ public class GameSettings : MonoBehaviour
 		instance = this;
 		IsGameOver = false;
 		IsGamePause = false;
+		KilledObstaclesCount = 0;
 
 		tapZoneWidth = 106.65f;	// hardcode this, do not change the value if there is no problem with moving crew when tapping
 		tapZoneHeight = 180f;   // hardcode this, do not change the value if there is no problem with moving crew when tapping

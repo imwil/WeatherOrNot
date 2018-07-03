@@ -22,4 +22,12 @@ public class ObstacleManager : MonoBehaviour
 			spawners[i].Lane = (GameSettings.Lane)i;
 		}
 	}
+
+	public void DestroyAll()
+	{
+		for (int i = 0; i < (int)GameSettings.Lane.COUNT; i++)
+		{
+			spawners[i].DestroyAll();
+		}
+	}
 }
