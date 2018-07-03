@@ -26,7 +26,7 @@ public class Obstacle : MonoBehaviour
 	{
 		m_rigidBody2D.velocity = Vector2.down * SpeedManager.instance.ObstacleSpeed;
 
-		if (GameSettings.instance.IsGameOver || GameSettings.instance.IsGamePause)
+		if (GameSettings.instance.State != GameSettings.GameState.IN_GAME)
 		{
 			m_rigidBody2D.velocity = Vector2.zero;
 		}
