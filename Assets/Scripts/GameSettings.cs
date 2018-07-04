@@ -7,7 +7,7 @@ public class GameSettings : MonoBehaviour
 {
 	public static GameSettings instance = null;
 
-	public int healthPoint;
+	public int maxHealthPoint;
 	public Crew crew;
 	public int maxKilledObstacles;
 
@@ -26,6 +26,7 @@ public class GameSettings : MonoBehaviour
 		COUNT
 	};
 
+	public int HealthPoint { get; set; }
 	private GameState m_state;
 	public GameState State
 	{
@@ -116,6 +117,10 @@ public class GameSettings : MonoBehaviour
 				};
 				TouchKit.addGestureRecognizer(volcanoRecognizer);
 			}
+			else
+			{
+				TouchKit.removeAllGestureRecognizers();
+			}
 		}
 	}
 	public int KilledObstaclesCount { get; set; }
@@ -128,6 +133,7 @@ public class GameSettings : MonoBehaviour
 	{
 		instance = this;
 
+		HealthPoint = maxHealthPoint;
 		State = GameState.MAIN_MENU;
 		KilledObstaclesCount = 0;
 
@@ -144,7 +150,7 @@ public class GameSettings : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (healthPoint <= 0)
+		if (HealthPoint <= 0)
 		{
 			State = GameState.GAME_OVER;
 		}
@@ -161,5 +167,20 @@ public class GameSettings : MonoBehaviour
 			prevStateBeforePause = State;
 			State = GameState.PAUSE;
 		}
+	}
+
+	public void Revive()
+	{
+		HealthPoint = maxHealthPoint;
+		State = GameState.IN_GAME;
+	}
+
+	public void ResetGame()
+	{
+		HealthPoint = maxHealthPoint;
+		ObstacleManager.instance.DestroyAll();
+		ScoreManager.instance.Score = 0;
+		crew.Lane = GameSettings.Lane.MIDDLE;
+		HUDManager.instance.ResetOmegaBar();
 	}
 }

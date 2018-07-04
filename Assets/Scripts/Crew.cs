@@ -38,7 +38,7 @@ public class Crew : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (GameSettings.instance && GameSettings.instance.State == GameSettings.GameState.IN_GAME)
+		//if (GameSettings.instance && GameSettings.instance.State == GameSettings.GameState.IN_GAME)
 		{
 			if (target.y != transform.position.y)
 			{

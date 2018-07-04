@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
 {
+	public static HUDManager instance;
+
 	[SerializeField] private Button pauseButton;
 	[SerializeField] private Button shieldButton;
 	[SerializeField] private Button doubleScoreButton;
@@ -17,6 +19,8 @@ public class HUDManager : MonoBehaviour
 
 	private void Awake()
 	{
+		instance = this;
+
 		if (omegaBarSlider)
 		{
 			m_btnHandle = omegaBarSlider.handleRect.GetComponent<Button>();
@@ -51,10 +55,7 @@ public class HUDManager : MonoBehaviour
 			m_btnHandle.onClick.AddListener(() =>
 			{
 				ObstacleManager.instance.DestroyAll();
-				GameSettings.instance.KilledObstaclesCount = 0;
-				omegaBarSlider.value = 0f;
-				m_btnHandle.interactable = false;
-				m_btnHandle.transition = Button.Transition.None;
+				ResetOmegaBar();
 			});
 		}
 	}
@@ -71,5 +72,13 @@ public class HUDManager : MonoBehaviour
 				m_btnHandle.transition = Button.Transition.ColorTint;
 			}
 		}
+	}
+
+	public void ResetOmegaBar()
+	{
+		GameSettings.instance.KilledObstaclesCount = 0;
+		omegaBarSlider.value = 0f;
+		m_btnHandle.interactable = false;
+		m_btnHandle.transition = Button.Transition.None;
 	}
 }

@@ -49,9 +49,11 @@ public class InGameTransition : MonoBehaviour
 			cgInGame.alpha = Mathf.MoveTowards(cgInGame.alpha, 1.0f, Time.deltaTime / transitionTime);
 			cgMainMenu.alpha = Mathf.MoveTowards(cgMainMenu.alpha, 0.0f, Time.deltaTime / transitionTime);
 			cgMainMenu.interactable = false;
+			cgMainMenu.blocksRaycasts = false;
 			if (cgInGame.alpha == 1.0f)
 			{
 				cgInGame.interactable = true;
+				cgInGame.blocksRaycasts = true;
 			}
 		}
 	}

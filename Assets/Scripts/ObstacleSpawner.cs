@@ -12,7 +12,6 @@ public class ObstacleSpawner : MonoBehaviour
 	{
 		LIGHTNING = 0,
 		RAIN,
-		EARTHQUAKE,
 		STORM,
 		VOLCANO,
 		COUNT
@@ -80,7 +79,7 @@ public class ObstacleSpawner : MonoBehaviour
 
 	public void DestroyObstacle(Obstacle obstacle, bool isKill = true)
 	{
-		Debug.LogFormat("{0}, {1}, {2}, {3}, {4}", m_obstacles[(int)ObstacleType.LIGHTNING].Count, m_obstacles[(int)ObstacleType.RAIN].Count, m_obstacles[(int)ObstacleType.EARTHQUAKE].Count, m_obstacles[(int)ObstacleType.STORM].Count, m_obstacles[(int)ObstacleType.VOLCANO].Count);
+		Debug.LogFormat("{0}, {1}, {2}, {3}", m_obstacles[(int)ObstacleType.LIGHTNING].Count, m_obstacles[(int)ObstacleType.RAIN].Count, m_obstacles[(int)ObstacleType.STORM].Count, m_obstacles[(int)ObstacleType.VOLCANO].Count);
 		if (obstacle != null && m_obstacles[(int)obstacle.Type].Count > 0)
 		{
 			Destroy(obstacle.gameObject);

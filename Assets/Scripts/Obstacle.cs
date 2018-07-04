@@ -39,8 +39,8 @@ public class Obstacle : MonoBehaviour
 			bool isKill = false;
 			if (collision.CompareTag("Ship"))
 			{
-				GameSettings.instance.healthPoint -= 1;
-				Debug.Log("healthPoint = " + GameSettings.instance.healthPoint);
+				GameSettings.instance.HealthPoint -= 1;
+				Debug.Log("healthPoint = " + GameSettings.instance.HealthPoint);
 				isKill = false;
 			}
 			else if (collision.CompareTag("Shield"))
