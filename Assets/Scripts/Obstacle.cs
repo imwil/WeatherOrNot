@@ -46,6 +46,7 @@ public class Obstacle : MonoBehaviour
 			else if (collision.CompareTag("Shield"))
 			{
 				isKill = true;
+				PowerUpManager.instance.Activate(PowerUpManager.Type.SHIELD, false);
 			}
 			ObstacleManager.instance.spawners[(int)Lane].DestroyObstacle(this, isKill);
 		}
