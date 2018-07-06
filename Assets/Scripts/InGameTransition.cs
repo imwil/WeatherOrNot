@@ -7,8 +7,8 @@ public class InGameTransition : MonoBehaviour
 	public Transform transformShip;
 	public Transform transformBackground;
 
-	[SerializeField] private Vector2 targetShipPosition;
-	[SerializeField] private Vector2 targetShipScale;
+	[SerializeField] private Vector2 inGameShipPosition;
+	[SerializeField] private Vector2 inGameShipScale;
 	[SerializeField] private float transitionTime;
 	[SerializeField] private CanvasGroup cgInGame;
 	[SerializeField] private CanvasGroup cgMainMenu;
@@ -18,11 +18,11 @@ public class InGameTransition : MonoBehaviour
 
 	private void Awake()
 	{
-		targetBackgroundScale.x = transformBackground.localScale.x * targetShipScale.x / transformShip.localScale.x;
-		targetBackgroundScale.y = transformBackground.localScale.y * targetShipScale.y / transformShip.localScale.y;
+		targetBackgroundScale.x = transformBackground.localScale.x * inGameShipScale.x / transformShip.localScale.x;
+		targetBackgroundScale.y = transformBackground.localScale.y * inGameShipScale.y / transformShip.localScale.y;
 
-		shipPositionSpeed = Vector2.Distance(transformShip.position, targetShipPosition) / transitionTime;
-		shipScaleSpeed = Vector2.Distance(transformShip.localScale, targetShipScale) / transitionTime;
+		shipPositionSpeed = Vector2.Distance(transformShip.position, inGameShipPosition) / transitionTime;
+		shipScaleSpeed = Vector2.Distance(transformShip.localScale, inGameShipScale) / transitionTime;
 		backgroundScaleSpeed = Vector2.Distance(transformBackground.localScale, targetBackgroundScale) / transitionTime;
 	}
 
@@ -37,11 +37,11 @@ public class InGameTransition : MonoBehaviour
 	{
 		if (GameSettings.instance && GameSettings.instance.State == GameSettings.GameState.IN_GAME_TRANSITION)
 		{
-			transformShip.position = Vector2.MoveTowards(transformShip.position, targetShipPosition, shipPositionSpeed * Time.deltaTime);
-			transformShip.localScale = Vector2.MoveTowards(transformShip.localScale, targetShipScale, shipScaleSpeed * Time.deltaTime);
+			transformShip.position = Vector2.MoveTowards(transformShip.position, inGameShipPosition, shipPositionSpeed * Time.deltaTime);
+			transformShip.localScale = Vector2.MoveTowards(transformShip.localScale, inGameShipScale, shipScaleSpeed * Time.deltaTime);
 			transformBackground.localScale = Vector2.MoveTowards(transformBackground.localScale, targetBackgroundScale, backgroundScaleSpeed * Time.deltaTime);
 
-			if ((Vector2)transformShip.position == targetShipPosition)
+			if ((Vector2)transformShip.position == inGameShipPosition)
 			{
 				GameSettings.instance.State = GameSettings.GameState.IN_GAME;
 			}
