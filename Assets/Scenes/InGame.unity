@@ -689,7 +689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 153711162}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Top Left Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1138,6 +1138,80 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 297126041}
+--- !u!1 &334134137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 334134138}
+  - component: {fileID: 334134140}
+  - component: {fileID: 334134139}
+  m_Layer: 5
+  m_Name: Pause Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &334134138
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 334134137}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1162433156}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 450, y: 80}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &334134139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 334134137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: cb9d2ed172be0c946aa0cf9916225a86, type: 3}
+    m_FontSize: 70
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 70
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Game Paused
+--- !u!222 &334134140
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 334134137}
 --- !u!1 &363225093
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,7 +2144,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Current record: %s'
+  m_Text: 'Current record: {0}'
 --- !u!222 &545508646
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2340,7 +2414,7 @@ GameObject:
   - component: {fileID: 656507391}
   - component: {fileID: 656507390}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Highscore Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2997,7 +3071,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Your journey ends at %s miles
+  m_Text: Your journey ends at {0} miles
 --- !u!222 &867220540
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3911,6 +3985,7 @@ RectTransform:
   - {fileID: 1802442465}
   - {fileID: 1011777221}
   - {fileID: 975557384}
+  - {fileID: 334134138}
   m_Father: {fileID: 1592948018}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4119,6 +4194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labelScore: {fileID: 778029146}
+  labelHighScore: {fileID: 656507390}
   baseScorePerTick: 1
   tickPerSecond: 15
   multiplier: 2
@@ -4166,6 +4242,7 @@ MonoBehaviour:
   slowTimeButton: {fileID: 502685397}
   omegaBarSlider: {fileID: 1441380528}
   startGameTestButton: {fileID: 365395104}
+  lblGamePaused: {fileID: 334134139}
 --- !u!114 &1248574951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4214,8 +4291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupDeath: {fileID: 715045294}
-  popupResult: {fileID: 1503246003}
-  popupNewHighscore: {fileID: 1764073439}
+  popupResult: {fileID: 1503246007}
+  popupNewHighscore: {fileID: 1764073443}
 --- !u!1 &1261011742
 GameObject:
   m_ObjectHideFlags: 0
@@ -4604,7 +4681,7 @@ GameObject:
   - component: {fileID: 1364604438}
   - component: {fileID: 1364604437}
   m_Layer: 5
-  m_Name: Score
+  m_Name: Highscore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5335,6 +5412,7 @@ GameObject:
   - component: {fileID: 1503246004}
   - component: {fileID: 1503246006}
   - component: {fileID: 1503246005}
+  - component: {fileID: 1503246007}
   m_Layer: 5
   m_Name: Result
   m_TagString: Untagged
@@ -5395,6 +5473,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1503246003}
+--- !u!114 &1503246007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1503246003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bee7135bbe8bb04a9c6aafc2ac3b85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  content: {fileID: 867220539}
+  record: {fileID: 545508645}
 --- !u!1 &1515126811
 GameObject:
   m_ObjectHideFlags: 0
@@ -6229,6 +6320,7 @@ GameObject:
   - component: {fileID: 1764073440}
   - component: {fileID: 1764073442}
   - component: {fileID: 1764073441}
+  - component: {fileID: 1764073443}
   m_Layer: 5
   m_Name: New Highscore
   m_TagString: Untagged
@@ -6289,6 +6381,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1764073439}
+--- !u!114 &1764073443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1764073439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3a429bd16d468b49a498c03e583f5f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  content: {fileID: 1812034665}
 --- !u!1 &1802442464
 GameObject:
   m_ObjectHideFlags: 0
@@ -6591,7 +6695,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Your journey ends at %s miles
+  m_Text: Your journey ends at {0} miles
 --- !u!222 &1812034666
 CanvasRenderer:
   m_ObjectHideFlags: 0

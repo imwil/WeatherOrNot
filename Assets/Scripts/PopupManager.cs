@@ -5,8 +5,8 @@ using UnityEngine;
 public class PopupManager : MonoBehaviour
 {
 	public GameObject popupDeath;
-	public GameObject popupResult;
-	public GameObject popupNewHighscore;
+	public PopupResult popupResult;
+	public PopupHighscore popupNewHighscore;
 
 	// Use this for initialization
 	void Start ()
@@ -17,9 +17,11 @@ public class PopupManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (GameSettings.instance.State == GameSettings.GameState.GAME_OVER)
+		if (GameSettings.instance.State == GameSettings.GameState.GAME_OVER && !(popupResult.gameObject.active || popupNewHighscore.gameObject.active))
 		{
 			popupDeath.SetActive(true);
+			popupResult.SetScore(ScoreManager.instance.Score);
+			popupNewHighscore.SetScore(ScoreManager.instance.Score);
 		}
 		else
 		{
@@ -44,22 +46,30 @@ public class PopupManager : MonoBehaviour
 	public void OnGiveUpButtonPressed()
 	{
 		popupDeath.SetActive(false);
-		GameSettings.instance.ResetGame();
 		GameSettings.instance.State = GameSettings.GameState.PAUSE;
-		popupNewHighscore.SetActive(true);
+
+		if (ScoreManager.instance.IsHighScore())
+		{
+			ScoreManager.instance.SaveHighScore();
+			popupNewHighscore.gameObject.SetActive(true); 
+		}
+		else
+		{
+			popupResult.gameObject.SetActive(true);
+		}
 	}
 
 	public void OnNewJourneyButtonPressed()
 	{
-		popupNewHighscore.SetActive(false);
-		popupResult.SetActive(false);
-		GameSettings.instance.State = GameSettings.GameState.IN_GAME;
+		popupNewHighscore.gameObject.SetActive(false);
+		popupResult.gameObject.SetActive(false);
+		GameSettings.instance.ResetGame();
 	}
 
 	public void OnGoHomeButtonPressed()
 	{
-		popupNewHighscore.SetActive(false);
-		popupResult.SetActive(false);
+		popupNewHighscore.gameObject.SetActive(false);
+		popupResult.gameObject.SetActive(false);
 		GameSettings.instance.State = GameSettings.GameState.MAIN_MENU;
 	}
 }

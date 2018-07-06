@@ -180,7 +180,8 @@ public class GameSettings : MonoBehaviour
 		HealthPoint = maxHealthPoint;
 		ObstacleManager.instance.DestroyAll();
 		ScoreManager.instance.Score = 0;
-		crew.Lane = GameSettings.Lane.MIDDLE;
+		crew.Lane = Lane.MIDDLE;
 		HUDManager.instance.ResetOmegaBar();
+		State = GameState.IN_GAME;
 	}
 }

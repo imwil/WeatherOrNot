@@ -14,6 +14,7 @@ public class HUDManager : MonoBehaviour
 	[SerializeField] private Button slowTimeButton;
 	[SerializeField] private Slider omegaBarSlider;
 	[SerializeField] private Button startGameTestButton;
+	[SerializeField] private Text lblGamePaused;
 
 	private Button m_btnHandle;
 
@@ -32,7 +33,11 @@ public class HUDManager : MonoBehaviour
 	{
 		if (pauseButton)
 		{
-			pauseButton.onClick.AddListener(() => { GameSettings.instance.Pause(); });
+			pauseButton.onClick.AddListener(() =>
+			{
+				GameSettings.instance.Pause();
+				lblGamePaused.gameObject.SetActive(GameSettings.instance.State == GameSettings.GameState.PAUSE);
+			});
 		}
 		if (shieldButton)
 		{

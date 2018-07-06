@@ -8,9 +8,24 @@ public class ScoreManager : MonoBehaviour
 	public static ScoreManager instance;
 
 	public Text labelScore;
+	public Text labelHighScore;
 	public float baseScorePerTick;
 	public int tickPerSecond;
 	public float multiplier;
+
+	public float HighScore
+	{
+		get
+		{
+			return PlayerPrefs.GetFloat(scoreKey, 0);
+		}
+		set
+		{
+			labelHighScore.text = ((int)value).ToString();
+			PlayerPrefs.SetFloat(scoreKey, value);
+			PlayerPrefs.Save();
+		}
+	}
 
 	private float m_score = 0;
 	public float Score
@@ -27,12 +42,18 @@ public class ScoreManager : MonoBehaviour
 	}
 	public float ScorePerTick { get; set; }
 
+	private const string scoreKey = "Score";
+
 	private float tickInterval;
 	private float lastTickTime;
 
 	private void Awake()
 	{
 		instance = this;
+		
+		Score = 0;
+		labelHighScore.text = ((int)HighScore).ToString();
+
 		tickInterval = 1f / tickPerSecond;
 		lastTickTime = 0f;
 		ApplyMultiplier(false);
@@ -59,5 +80,15 @@ public class ScoreManager : MonoBehaviour
 		{
 			ScorePerTick = baseScorePerTick;
 		}
+	}
+
+	public void SaveHighScore()
+	{
+		HighScore = Score;
+	}
+
+	public bool IsHighScore()
+	{
+		return Score > HighScore;
 	}
 }
